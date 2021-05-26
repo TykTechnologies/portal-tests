@@ -4,6 +4,7 @@
   "description": "UI automated tests for Raava",
   "main": "wdio.conf.js",
   "directories": {
+    "headless-test": "WDIO_HEADLESS=1 npm test",
     "test": "npx wdio wdio.conf.js"
   },
   "scripts": {

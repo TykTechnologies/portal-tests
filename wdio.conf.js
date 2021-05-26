@@ -53,6 +53,14 @@ exports.config = {
         maxInstances: 5,
         //
         browserName: 'chrome',
+        "goog:chromeOptions": {
+            args: [
+              ...(process.env.WDIO_HEADLESS ? ['--headless', "--window-size=1440, 900"] : []),
+              '--incognito',
+              '--disable-web-security',
+              '--allow-running-insecure-content'
+            ]
+        },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
