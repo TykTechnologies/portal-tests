@@ -2,7 +2,7 @@ import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { main_page } from '../../../lib/pom/Main_page';
 
-describe('Create simple API', () => {
+describe('Login/logout check', () => {
  
   before(() => {
     login_page.open();
