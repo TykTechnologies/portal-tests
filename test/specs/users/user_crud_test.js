@@ -3,7 +3,7 @@ import { admin_page } from '../../../lib/pom/Admin_page';
 import { users_page } from '../../../lib/pom/Users_page';
 import { main_page } from '../../../lib/pom/Main_page';
 
-describe('Create simple API', () => {
+describe('Creating new users', () => {
   const userDetails = {
     first: "test_first_name",
     last: "test_second_name",
