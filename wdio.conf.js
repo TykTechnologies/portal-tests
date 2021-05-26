@@ -74,7 +74,7 @@ exports.config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -235,7 +235,6 @@ exports.config = {
     afterTest: function(test, context, { error, result, duration, passed, retries }) {
         if (error !== undefined) {
             console.error(`>> ERROR: ${error}`);
-browser.debug();
         }
     },
 
@@ -289,4 +288,4 @@ browser.debug();
     */
     //onReload: function(oldSessionId, newSessionId) {
     //}
-}
+};

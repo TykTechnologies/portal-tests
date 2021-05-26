@@ -23,28 +23,10 @@ describe('Create simple API', () => {
     users_page.PLUS_BUTTON.click();
     users_page.fillNewUserForm(userDetails);
     users_page.ADD_BUTTON.click();
-    browser.debug()
   });
 
-  it('Main Admin page should be displayed after login', () => {
-      wdioExpect(admin_page.SECTION_TITLE_TEXT).toHaveText("Admin");
+  it('New user is visible in the user table', () => {
+    wdioExpect($(`div=${userDetails.email}`)).toBeDisplayed();
   });
-
-  it('Admin is able to open dashboard', () => {
-    admin_page.openDashboard();
-    wdioExpect(main_page.APIS_BUTTON).toBeDisplayed();
-  });
-
-  it('Admin is able to logout', () => {
-      browser.pause(1000);
-      main_page.LOG_OUT_BUTTON.click();
-      wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
-      wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
-  });
-
-  it('Users stays logout after refresh', () => {
-    browser.refresh();
-    wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
-    wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
-  });
+  
 });
