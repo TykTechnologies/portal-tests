@@ -1,7 +1,7 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 
-describe('Service was loaded on the bootstraping', () => {
+xdescribe('Service was loaded on the bootstraping', () => {
   const serviceName = 'raava service 1';
 
   before(() => {
