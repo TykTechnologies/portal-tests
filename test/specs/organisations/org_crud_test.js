@@ -2,7 +2,7 @@ import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { org_page } from '../../../lib/pom/Org_page';
 
-describe('Creating new users', () => {
+describe('Creating new Organisation', () => {
   const orgDetails = {
     name: "test-org",
     name_update: "test-org-update"
@@ -15,9 +15,9 @@ describe('Creating new users', () => {
 
   it('Admin should be able to create an Organisation', () => {
     admin_page.ORGANIATIONS_BUTTON.click();
-    org_page.PLUS_BUTTON.click();
-    org_page.NAME_INPUT.setValue(orgDetails.name);
     org_page.ADD_BUTTON.click();
+    org_page.NAME_INPUT.setValue(orgDetails.name);
+    org_page.SUBMIT_NEW_BUTTON.click();
   });
 
   it('New org is visible in the org table', () => {

@@ -20,9 +20,9 @@ describe('Creating new users', () => {
 
   it('Admin should be able to create a user', () => {
     admin_page.USERS_BUTTON.click();
-    users_page.PLUS_BUTTON.click();
-    users_page.fillNewUserForm(userDetails);
     users_page.ADD_BUTTON.click();
+    users_page.fillNewUserForm(userDetails);
+    users_page.SUBMIT_NEW_BUTTON.click();
   });
 
   it('New user is visible in the user table', () => {
