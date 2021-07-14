@@ -26,6 +26,8 @@ describe('Creating new Organisation', () => {
 
   it('Admin is able to update Org name', () => {
     org_page.TABLE.clickCellWithText(orgDetails.name);
+    org_page.EDIT_BUTTON.click();
+    org_page.NAME_INPUT.waitForClickable();
     org_page.NAME_INPUT.setValue(orgDetails.name_update);
     org_page.SAVE_CHANGES_BUTTON.click();
     wdioExpect($(`div=${orgDetails.name}`)).not.toBeDisplayed();
