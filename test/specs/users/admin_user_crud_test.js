@@ -10,7 +10,6 @@ describe('Creating new users', () => {
     email: "test_email@tyk.io",
     password: "test123",
     update_password: "test321",
-    role: "test_role",
     isActive: true
   };
 
