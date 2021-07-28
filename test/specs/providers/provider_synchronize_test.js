@@ -14,6 +14,7 @@ describe('Synchronize with Tyk Pro', () => {
   };
 
   before(() => {
+    require('expect-webdriverio').setOptions({ wait: 60000 });
     const gw_connection = new Gateway_connection();
     gw_connection.waitUntilGWisUp();
     login_page.open();
