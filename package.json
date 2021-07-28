@@ -26,6 +26,7 @@
     "@babel/preset-env": "^7.10.3",
     "@babel/register": "^7.10.3",
     "@wdio/cli": "^6.10.5",
+    "@wdio/firefox-profile-service": "^7.7.3",
     "@wdio/local-runner": "^6.10.5",
     "@wdio/mocha-framework": "^6.10.4",
     "@wdio/spec-reporter": "^6.8.1",
