@@ -1,6 +1,3 @@
-# raava-test
-UI automated tests for Raava
-
 # Functionality covered in automated tests:
 <details>
  <summary>Creating new users</summary>
