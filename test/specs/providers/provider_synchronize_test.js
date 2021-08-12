@@ -25,6 +25,7 @@ describe('Synchronize with Tyk Pro', () => {
     admin_page.PROVIDERS_BUTTON.click();
     providers_page.TABLE.clickCellWithText("tyk-pro");
     providers_page.EDIT_BUTTON.click();
+    browser.pause(1000);
     providers_page.NAME_INPUT.waitForClickable();
     providers_page.NAME_INPUT.setValue(providerDetails.name);
     providers_page.METADATA_INPUT.setValue(providerDetails.metaData);
