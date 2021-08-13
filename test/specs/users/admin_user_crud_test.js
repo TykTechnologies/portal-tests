@@ -8,8 +8,6 @@ describe('Creating new users', () => {
     update_first: "update_first_name",
     last: "test_second_name",
     email: "test_email@tyk.io",
-    password: "test123",
-    update_password: "test321",
     isActive: true
   };
 
@@ -32,7 +30,6 @@ describe('Creating new users', () => {
   it('Admin should be able to update a provider-admin account', () => {
     admin_users_page.TABLE.clickCellWithText(userDetails.email);
     admin_users_page.FIRST_NAME_INPUT.setValue(userDetails.update_first);
-    admin_users_page.PASSWORD_INPUT.setValue(userDetails.update_password);
     admin_users_page.SAVE_CHANGES_BUTTON.click();
     wdioExpect($(`div=${userDetails.update_first}`)).toBeDisplayed();
   });

@@ -2,15 +2,13 @@ import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { api_consumers_page } from '../../../lib/pom/Api_consumers_page';
 
-describe('Creating new users', () => {
+describe('Creating new API consumer', () => {
   const userDetails = {
     first: "test_first_name",
     update_first: "update_first",
     last: "test_second_name",
     email: "api_consumer_email@tyk.io",
-    password: "test123",
     update_password: "test321",
-    isActive: true,
     org: "Default Organisation"
   };
 
@@ -33,7 +31,6 @@ describe('Creating new users', () => {
   it('Admin should be able to update a developer', () => {
     api_consumers_page.TABLE.clickCellWithText(userDetails.email);
     api_consumers_page.FIRST_NAME_INPUT.setValue(userDetails.update_first);
-    api_consumers_page.PASSWORD_INPUT.setValue(userDetails.update_password);
     api_consumers_page.SAVE_CHANGES_BUTTON.click();
     wdioExpect($(`div=${userDetails.update_first}`)).toBeDisplayed();
   });
