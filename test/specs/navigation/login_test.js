@@ -20,7 +20,11 @@ describe('Login/logout check', () => {
 
     it('Admin is able to logout', () => {
         browser.pause(1000);
-        portal_page.logOut();
+        admin_page.openDashboard()
+        portal_page.logOut()
+        wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
+        wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
+
     });
 
     it('Users stays logout after refresh', () => {
