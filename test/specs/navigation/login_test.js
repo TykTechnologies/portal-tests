@@ -1,6 +1,7 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { main_page } from '../../../lib/pom/Main_page';
+import { portal_page } from '../../../lib/pom/Portal_page';
 
 describe('Login/logout check', () => {
 
@@ -17,22 +18,14 @@ describe('Login/logout check', () => {
         wdioExpect(admin_page.SECTION_TITLE_TEXT).toHaveText("Admin");
     });
 
-    it('Admin is able to open dashboard', () => {
-        admin_page.openDashboard();
-        wdioExpect(main_page.APIS_BUTTON).toBeDisplayed();
-    });
-
     it('Admin is able to logout', () => {
         browser.pause(1000);
-        main_page.USER_PROFILE_DROPDOWN.click()
-        main_page.LOG_OUT_BUTTON.click();
-        wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
-        wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
+        portal_page.logOut();
     });
 
     it('Users stays logout after refresh', () => {
         browser.refresh();
-        wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
-        wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
+        wdioExpect(portal_page.REGISTER_BUTTON).toBeDisplayed();
+        wdioExpect(portal_page.LOG_IN_BUTTON).toBeDisplayed();
     });
 });
