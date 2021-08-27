@@ -35,7 +35,8 @@ describe('Creating new Organisation', () => {
   });
 
   it('Admin should be able to delete Org', () => {
-    org_page.TABLE.deleteRow(0);
+    const rowNumber = org_page.TABLE.getRowNumberOfCellWithValue(orgDetails.name_update);
+    org_page.TABLE.deleteRow(rowNumber);
     const wasRowDeleted = org_page.TABLE.isCellWithTextNotDisplayed(orgDetails.name_update);
     expect(wasRowDeleted).to.be.true;
   });
