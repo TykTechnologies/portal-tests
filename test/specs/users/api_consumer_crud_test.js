@@ -31,7 +31,7 @@ describe('Creating new API consumer', () => {
         api_consumers_page.TABLE.clickCellWithText(userDetails.email);
         api_consumers_page.FIRST_NAME_INPUT.setValue(userDetails.update_first);
         api_consumers_page.SAVE_CHANGES_BUTTON.click();
-        wdioExpect($(`div=${userDetails.update_first}`)).toBeDisplayed();
+        wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).toBeDisplayed();
     });
 
 });
