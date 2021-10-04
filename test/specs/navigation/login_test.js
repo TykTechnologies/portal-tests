@@ -15,13 +15,13 @@ describe('Login/logout check', () => {
     });
 
     it('Main Admin page should be displayed after login', () => {
-        wdioExpect(admin_page.SECTION_TITLE_TEXT).toHaveText("Admin");
+        wdioExpect(admin_page.USER_PROFILE_BUTTON).toBeDisplayed();
     });
 
     it('Admin is able to logout', () => {
         browser.pause(1000);
-        admin_page.openDashboard()
-        portal_page.logOut()
+        admin_page.openDashboard();
+        portal_page.logOut();
         wdioExpect(main_page.LOG_IN_BUTTON).toBeDisplayed();
         wdioExpect(main_page.REGISTER_BUTTON).toBeDisplayed();
 
