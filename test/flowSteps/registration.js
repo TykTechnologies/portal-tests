@@ -30,7 +30,7 @@ describe('Registation without invite code', () => {
   });
 
   it('User can see information about portal beeing disabled', () => {
-    wdioExpect($('h2*=This Portal is disabled')).toBeDisplayed();  
+    wdioExpect($(`a*=${registrationDetails.first} ${registrationDetails.last}`)).toBeDisplayed();  
   });
 
 });
