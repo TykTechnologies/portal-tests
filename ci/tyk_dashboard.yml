@@ -4,10 +4,10 @@ services:
         container_name: tyk-dashboard-local
         image: tykio/tyk-dashboard:v3.2.1
         ports:
-            - "3005:3000"
+            - "3000:3000"
         environment:
             - TYK_LOGLEVEL=info
-            - TYK_DB_LICENSEKEY
+            - "TYK_DB_LICENSEKEY=${TYK_DB_LICENSEKEY}"
         volumes:
             - ./tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
         depends_on:
@@ -17,7 +17,7 @@ services:
         container_name: tyk-gateway-local
         image: tykio/tyk-gateway:v3.2.1
         ports:
-            - "8085:8080" 
+            - "8080:8080" 
         volumes:
             - ./tyk.conf:/opt/tyk-gateway/tyk.conf
         environment:
