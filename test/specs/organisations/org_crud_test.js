@@ -26,7 +26,6 @@ describe('Creating new Organisation', () => {
 
   it('Admin is able to update Org name', () => {
     org_page.TABLE.clickCellWithText(orgDetails.name);
-    org_page.EDIT_BUTTON.click();
     org_page.NAME_INPUT.waitForClickable();
     org_page.NAME_INPUT.setValue(orgDetails.name_update);
     org_page.SAVE_CHANGES_BUTTON.click();
@@ -35,7 +34,8 @@ describe('Creating new Organisation', () => {
   });
 
   it('Admin should be able to delete Org', () => {
-    org_page.TABLE.deleteRow(1);
+    const rowNumber = org_page.TABLE.getRowNumberOfCellWithValue(orgDetails.name_update);
+    org_page.TABLE.deleteRow(rowNumber);
     const wasRowDeleted = org_page.TABLE.isCellWithTextNotDisplayed(orgDetails.name_update);
     expect(wasRowDeleted).to.be.true;
   });
