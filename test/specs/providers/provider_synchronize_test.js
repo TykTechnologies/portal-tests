@@ -36,8 +36,12 @@ describe('Synchronize with Tyk Pro', () => {
   it('checking tyk pro', () => {
     browser.url("http://localhost:3000");
     // login_page.open();
-    login_page.login("raava@tyk.io", "test123");
-    wdioExpect(".tyk-nav-bar__right").toBeDisplayed()
+    login_page.USERNAME_INPUT.setValue("raava@tyk.io");
+    login_page.PASSWORD_INPUT.setValue("test123");
+    $('button*=Login').click();
+    wdioExpect($(".tyk-nav-bar__right")).toBeDisplayed();
+    $('span*=APIs').click();
+    wdioExpect($("a*=raava_oauth_2")).toBeDisplayed();
   })
 
   it('Admin should be able to ADD provider with proper Tyk details', () => {
