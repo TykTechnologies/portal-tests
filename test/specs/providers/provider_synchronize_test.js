@@ -15,7 +15,7 @@ describe('Synchronize with Tyk Pro', () => {
 
   before(() => {
     var exec = require('child_process').exec;
-    var command = 'curl -X GET http://localhost:3000/api/apis --header "Authorization:d35f751e70dc429843a52acf8a3f4c8d"';
+    var command = 'curl -X GET http://localhost:3000/api/apis --header "Authorization:3b95bd85db9049f1412bcaa2eed78cd9"';
     var child = exec(command, function(error, stdout, stderr){
 
       console.log('stdout: ' + stdout);
@@ -27,8 +27,10 @@ describe('Synchronize with Tyk Pro', () => {
       }
       
       });
-    login_page.open();
-    login_page.login();
+    browser.url("http://localhost:3000");
+    // login_page.open();
+    login_page.login("raava@tyk.io", "test123");
+    wdioExpect(".tyk-nav-bar__right").toBeDisplayed()
   });
 
   it('Admin should be able to ADD provider with proper Tyk details', () => {
