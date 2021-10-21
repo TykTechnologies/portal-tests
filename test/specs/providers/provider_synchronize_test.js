@@ -33,6 +33,13 @@ describe('Synchronize with Tyk Pro', () => {
     wdioExpect(".tyk-nav-bar__right").toBeDisplayed()
   });
 
+  it('checking tyk pro', () => {
+    browser.url("http://localhost:3000");
+    // login_page.open();
+    login_page.login("raava@tyk.io", "test123");
+    wdioExpect(".tyk-nav-bar__right").toBeDisplayed()
+  })
+
   it('Admin should be able to ADD provider with proper Tyk details', () => {
     admin_page.PROVIDERS_BUTTON.click();
     // providers_page.TABLE.clickCellWithText("tyk-pro");
