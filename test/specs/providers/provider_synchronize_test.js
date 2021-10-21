@@ -1,52 +1,38 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { providers_page } from '../../../lib/pom/Providers_page';
-import { TYK_ORG_ID, TYK_SECRET, TYK_PRO_URL } from '../../../config_variables';
+import { TYK_ORG_ID, TYK_PRO_URL } from '../../../config_variables';
+import { createNewTykUser } from '../../../lib/utils';
+import { uuid } from 'uuidv4';
 
 describe('Synchronize with Tyk Pro', () => {
+  const newTykUserRequestBody = {
+    "first_name": "Jason",
+    "last_name": "Jasonson",
+    "email_address": `testUser${uuid()}@test.com`,
+    "active": true,
+    "org_id": `${TYK_ORG_ID}`,
+    "password": "thisisatest",
+    "user_permissions": { "IsAdmin": "admin" }
+  };
   const expectedCountOfProducts = "4";
   const expectedCountOfPlans = "1";
   const providerDetails = {
     name: "tyk provider synchro test",
     url: TYK_PRO_URL,
-    secter: TYK_SECRET,
     org_id: TYK_ORG_ID  
   };
 
-  before(() => {
-    var exec = require('child_process').exec;
-    var command = 'curl -X GET http://localhost:3000/api/apis --header "Authorization:3b95bd85db9049f1412bcaa2eed78cd9"';
-    var child = exec(command, function(error, stdout, stderr){
-
-      console.log('stdout: ' + stdout);
-      console.log('stderr: ' + stderr);
-      
-      if(error !== null)
-      {
-          console.log('exec error: ' + error);
-      }
-      
-      });
-    // browser.url("http://localhost:3000");
-    // // login_page.open();
-    // login_page.login("raava@tyk.io", "test123");
-    // wdioExpect(".tyk-nav-bar__right").toBeDisplayed()
+  before(() => {    
+    providerDetails.secter = createNewTykUser(newTykUserRequestBody);
+    console.log(`New user was created with secret: ${providerDetails.secret}`);
+    login_page.open();
+    login_page.login();
   });
 
-  it('checking tyk pro', () => {
-    browser.url("http://localhost:3000");
-    // login_page.open();
-    login_page.USERNAME_INPUT.setValue("raava@tyk.io");
-    login_page.PASSWORD_INPUT.setValue("test123");
-    $('button*=Login').click();
-    wdioExpect($(".tyk-nav-bar__right")).toBeDisplayed();
-    $('span*=APIs').click();
-    wdioExpect($("a*=raava_oauth_2")).toBeDisplayed();
-  })
 
   it('Admin should be able to ADD provider with proper Tyk details', () => {
     admin_page.PROVIDERS_BUTTON.click();
-    // providers_page.TABLE.clickCellWithText("tyk-pro");
     providers_page.ADD_BUTTON.click();
     providers_page.NAME_INPUT.waitForClickable();
     providers_page.NAME_INPUT.setValue(providerDetails.name);
