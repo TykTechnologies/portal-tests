@@ -32,6 +32,6 @@ services:
     tyk-mongo:
         image: mongo:4.1
         volumes:
-            - ./mongo-volume:/data/db
+            - ./mongo-volume/data:/data/db
         ports:
            - "27017:27017"
