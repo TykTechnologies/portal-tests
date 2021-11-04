@@ -32,7 +32,7 @@
     "@wdio/spec-reporter": "^7.10.1",
     "@wdio/sync": "^7.12.2",
     "chai": "^4.3.4",
-    "chromedriver": "^93.0.1",
+    "chromedriver": "^95.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-wdio": "^7.4.2",
     "timediff": "^1.1.1",
