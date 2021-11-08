@@ -29,7 +29,6 @@ services:
         image: redis:6
         volumes:
             - ./redis-volume/data:/var/lib/redis
-            - ./redis-volume/data:/data
         ports:
             - "6379:6379"
     tyk-mongo:
