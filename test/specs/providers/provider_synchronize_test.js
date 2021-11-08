@@ -25,7 +25,7 @@ describe('Synchronize with Tyk Pro', () => {
   };
 
   before(() => {    
-    providerDetails.secret = createNewTykUser(newTykUserRequestBody);
+    //providerDetails.secret = createNewTykUser(newTykUserRequestBody);
     console.log(`New user was created with secret: ${providerDetails.secret}`);
     login_page.open();
     login_page.login();
