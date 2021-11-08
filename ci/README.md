@@ -8,9 +8,9 @@ export TYK_DB_LICENSEKEY="LICENSE"
 ```
 or just put it into __.env__ file.
 
-2. Start docker-compose. Inside this folder execute:
+2. Start docker-compose. Inside main repo folder execute:
 ```
-docker-compose -f tyk_dashboard.yml up
+docker-compose -f ci/tyk_dashboard.yml up
 ```
 
 That's it! Right now you should have on your local:
