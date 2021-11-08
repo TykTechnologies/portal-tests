@@ -14,7 +14,7 @@ module.exports = {
     USER_EMAIL: process.env.USER_EMAIL || "auto_test@tyk.io",
     USER_PASSWORD: process.env.USER_PASSWORD || "test123",
 
-    TYK_SECRET: "78b5d27bb6c14fe6729368977860097b",
+    TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
     TYK_ADMIN_SECRET: "12345"
 };
