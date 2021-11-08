@@ -20,8 +20,10 @@ That's it! Right now you should have on your local:
 - __mongo__ on port 27017
 
 ## Data dump for testing Raava
-Mongo instance should be started with data dump that contains APIs and policies. Those will be imported in Raava as prducts and plans.
+Mongo instance should be started with data dump that contains APIs and policies. Those can be imported in Raava as prducts and plans.
+Credentails for creating Raava provider:
+- __Dashboard URL__- http://localhost:3000/
+- __Secret__ - 78b5d27bb6c14fe6729368977860097b
+- __ORG id__ - 617006c1829b6f0001c6c039
 
 To login to dasboard you can use already created user, email: raava@tyk.io, pass: test123.
-
-__Important__: before synchronyzing Raava with Dashboard you need to reset the API secret of choosen user.

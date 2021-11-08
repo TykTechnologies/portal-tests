@@ -27,6 +27,8 @@ services:
     tyk-redis:
         container_name: tyk-redis
         image: redis:6
+        volumes:
+            - ./redis-volume/data:/var/lib/redis
         ports:
             - "6379:6379"
     tyk-mongo:
