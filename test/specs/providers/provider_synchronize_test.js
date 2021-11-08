@@ -2,6 +2,7 @@ import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { providers_page } from '../../../lib/pom/Providers_page';
 import { TYK_ORG_ID, TYK_PRO_URL, TYK_SECRET } from '../../../config_variables';
+import { createNewTykUser } from '../../../lib/utils';
 import { uuid } from 'uuidv4';
 
 describe('Synchronize with Tyk Pro', () => {
