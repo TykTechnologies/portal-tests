@@ -24,7 +24,7 @@ describe('Registation without invite code', () => {
    });
 
   it('User is able to login', () => {
-    $('a*=Now you can login').click();
+    $('*=GO TO LOGIN').click();
     login_page.login(registrationDetails.email, registrationDetails.password);
     wdioExpect(browser).toHaveUrlContaining("/dashboard");
   });
