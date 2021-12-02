@@ -14,6 +14,7 @@ module.exports = {
     USER_EMAIL: process.env.USER_EMAIL || "auto_test@tyk.io",
     USER_PASSWORD: process.env.USER_PASSWORD || "test123",
 
+    PROVIDER_NAME: "tyk provider",
     INVITE_ORG: "inviteTestOrg",
     ORG_A_NAME: "orgA",
     ORG_B_NAME: "orgB",
@@ -30,6 +31,10 @@ module.exports = {
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
     TYK_ADMIN_SECRET: "12345",
 
+    //products and plans already created in Tyk db
+    PRODUCT_COUNT: "7",
+    PLAN_COUNT: "6",
+    
     PUBLIC_CATALOGUE_NAME: "Public Ctalogue",
     PRODUCT_PUBLIC_NAME: "public_product",
     PUBLIC_API_NAME: "public_api",
@@ -42,11 +47,13 @@ module.exports = {
     CUSTOM_CATALOGUE_ORG_A_NAME: "Org A Catalogue",
     PRODUCT_ORG_A_NAME: "product_org_a",
     CUSTOM_API_ORG_A_NAME: "custom_api_org_a",
+    //plan: SILVER_PLAN_NAME
 
     CUSTOM_CATALOGUE_TEAM_A_NAME: "Team A Catalogue",
     PRODUCT_TEAM_A_NAME: "product_team_a",
     CUSTOM_API_TEAM_A_NAME: "custom_api_team_a",
     CUSTOM_API_TEAM_A_NAME: "custom_api_team_a_bis",
+    //plan: GOLD_PLAN_NAME
 
     CUSTOM_CATALOGUE_TEAM_B_NAME: "Team B Catalogue",
     PRODUCT_TEAM_B_NAME: "product_team_b",
@@ -64,4 +71,8 @@ module.exports = {
     SILVER_PLAN_NAME: "silver_plan", //expiry: 12h, rate: 1000/135s, quota: 5000/1week
     GOLD_PLAN_NAME: "gold_plan", //expiry: never, rate: 1001/1s, quota: unlimited
     PLATINUM_PLAN_NAME: "platinum_plan", //expiry: never, rate: unlimited, quota: unlimited
+
+    //2nd org
+    ORG_2_TYK_SECRET: "134257b2eb8c46ac554c9e820f71e38b",
+    ORG_2_TYK_ORG_ID: "61a8ba54e35eb50001fe4449",
 };
