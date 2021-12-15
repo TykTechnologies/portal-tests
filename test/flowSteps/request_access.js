@@ -1,8 +1,5 @@
 import { login_page } from '../../lib/pom/Login_page';
-import { admin_page } from '../../lib/pom/Admin_page';
 import { main_page } from '../../lib/pom/Main_page';
-import { portal_catalogues_page } from '../../lib/pom/Portal_catalogues_page';
-import { portal_my_apps_page } from '../../lib/pom/Portal_apps_page';
 import { portal_products_page } from '../../lib/pom/Portal_products_page';
 import { portal_cart_page } from '../../lib/pom/Portal_cart_page';
 import { portal_apps_page } from '../../lib/pom/Portal_apps_page';
@@ -10,9 +7,10 @@ import { uuid } from 'uuidv4';
 import { PRODUCT_PUBLIC_NAME, FREE_PLAN_NAME} from '../../config_variables';
 
 const Portal_catalogue_card_object = require('../../lib/wrappers/portal_catalogue_card_object');
+var appName;
 
 describe('Requesting the access key with auto-approve', () => {
-  const appName = "test app 1 " + uuid();
+  appName = "test app 1 " + uuid();
 
   before(() => {
     login_page.open();
@@ -44,3 +42,5 @@ describe('Requesting the access key with auto-approve', () => {
   });
   
 });
+
+module.exports = appName;
