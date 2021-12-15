@@ -2,9 +2,11 @@ require('dotenv').config();
 
 const URL = process.env.URL || "http://localhost:3001/";
 const TYK_PRO_URL = process.env.TYK_PRO_URL || "http://localhost:3000/";
+const TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8080/";
 
 module.exports = {
     URL: URL,
+    TYK_GW_URL: TYK_GW_URL,
     TYK_PRO_URL: TYK_PRO_URL,
     LOGIN_PATH: "auth/login",
     DASHBOARD_API: TYK_PRO_URL + 'api/',

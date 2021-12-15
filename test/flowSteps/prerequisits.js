@@ -180,4 +180,8 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
     catalogues_page.addCatalogue(catalogueTeamADetails);
   });
 
+    it('make free plan auto approving', () => {
+      admin_page.PLANS_BUTTON.click();
+    });
+
 });
