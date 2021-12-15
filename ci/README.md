@@ -19,11 +19,11 @@ That's it! Right now you should have on your local:
 - __redis__ on port 6379
 - __mongo__ on port 27017
 
-## Data dump for testing Raava
-Mongo instance should be started with data dump that contains APIs and policies. Those can be imported in Raava as prducts and plans.
-Credentails for creating Raava provider:
+## Data dump for testing Portal
+Mongo instance should be started with data dump that contains APIs and policies. Those can be imported in Portal as prducts and plans.
+Credentails for creating Portal provider:
 - __Dashboard URL__- http://localhost:3000/
 - __Secret__ - 78b5d27bb6c14fe6729368977860097b
 - __ORG id__ - 617006c1829b6f0001c6c039
 
-To login to dasboard you can use already created user, email: raava@tyk.io, pass: test123.
+To login to dasboard you can use already created user, email: portal@tyk.io, pass: test123.

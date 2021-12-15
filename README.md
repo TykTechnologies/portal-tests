@@ -1,5 +1,5 @@
-# raava-test
-UI automated tests for Raava
+# Portal-test
+UI automated tests for Portal
 
 test coverage can be found [here](coverage.md)
 
@@ -21,7 +21,7 @@ npm headless-test
 
 ## Configuration
 We can execute test with following variables [default values]:
-- URL [http://localhost:3001/] - Raava UI url
+- URL [http://localhost:3001/] - Portal UI url
 - TYK_PRO_URL [http://localhost:3000/] - Tyk dashboard url
 - TYK_DB_LICENSEKEY [] - Tyk dashboard license
 
