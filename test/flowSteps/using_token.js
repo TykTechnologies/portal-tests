@@ -1,6 +1,7 @@
 import { login_page } from '../../lib/pom/Login_page';
 import { portal_page } from '../../lib/pom/Portal_page';
 import { GW_connection } from '../../lib/GW_connection';
+import { portal_apps_page } from '../../lib/pom/Portal_apps_page';
 import { PUBLIC_API_NAME } from '../../config_variables';
 
 module.exports = (appName) => {
