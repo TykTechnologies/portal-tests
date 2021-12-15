@@ -3,6 +3,7 @@ import { portal_page } from '../../lib/pom/Portal_page';
 import { GW_connection } from '../../lib/GW_connection';
 import { portal_apps_page } from '../../lib/pom/Portal_apps_page';
 import { PUBLIC_API_NAME } from '../../config_variables';
+import { dev_apps_page } from '../../lib/pom/Dev_apps_page';
 
 module.exports = (appName) => {
   let approved_request_object;
@@ -17,9 +18,9 @@ module.exports = (appName) => {
 
     it('Developer should see approved provisioning requet', () => {
       portal_page.openMyApps();
-      portal_apps_page.APPS_TABLE.clickCellWithText(appName);
-      portal_apps_page.expectCountOfApprovedRequests(1);
-      approved_request_object = portal_apps_page.getAllApprovedRequests()[0];
+      dev_apps_page.APPS_TABLE.clickCellWithText(appName);
+      dev_apps_page.expectCountOfApprovedRequests(1);
+      approved_request_object = dev_apps_page.getAllApprovedRequests()[0];
       approved_request_object.expectApprovedState();
     });
 
@@ -34,7 +35,7 @@ module.exports = (appName) => {
 
     it('Developer is able to rotate token', () => {
       approved_request_object.ROTATE_BUTTON.click();
-      portal_apps_page.POPUP_ROTATE_BUTTON.click();
+      dev_apps_page.POPUP_ROTATE_BUTTON.click();
       rotatedToken = approved_request_object.getToken();
       expect(rotatedToken).to.not.be.empty;
     });
@@ -54,9 +55,9 @@ module.exports = (appName) => {
     
     it('Developer is able to revoke token', () => {
       approved_request_object.REVOKE_BUTTON.click();
-      portal_apps_page.POPUP_REVOKE_BUTTON.click();
-      portal_apps_page.APPS_TABLE.clickCellWithText(appName);
-      portal_apps_page.expectCountOfApprovedRequests(0);
+      dev_apps_page.POPUP_REVOKE_BUTTON.click();
+      dev_apps_page.APPS_TABLE.clickCellWithText(appName);
+      dev_apps_page.expectCountOfApprovedRequests(0);
     });
 
     it('Revoked token is NOT recognized by GW', () => {

@@ -1,7 +1,7 @@
 {
-  "name": "raava-tests",
-  "version": "1.0.0",
-  "description": "UI automated tests for Raava",
+  "name": "portal-tests",
+  "version": "1.1.0",
+  "description": "UI automated tests for Tyk Portal",
   "main": "wdio.conf.js",
   "directories": {
     "test": "npx wdio wdio.conf.js"
@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TykTechnologies/raava-tests.git"
+    "url": "git+https://github.com/TykTechnologies/portal-tests.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/TykTechnologies/raava-tests/issues"
+    "url": "https://github.com/TykTechnologies/portal-tests/issues"
   },
-  "homepage": "https://github.com/TykTechnologies/raava-tests#readme",
+  "homepage": "https://github.com/TykTechnologies/portal-tests#readme",
   "devDependencies": {
     "@babel/core": "^7.15.5",
     "@babel/preset-env": "^7.15.4",
