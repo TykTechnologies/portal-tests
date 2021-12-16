@@ -15,7 +15,7 @@ describe('Prerequisits', () => {
   const teamsList = [[d.INVITE_ORG, d.INVITE_TEAM],[d.ORG_A_NAME, d.TEAM_A_NAME],
     [d.ORG_A_NAME, d.TEAM_A1_NAME], [d.ORG_B_NAME, d.ORG_B_NAME]];
   let devsList = {
-    email: [d.DEV_EMAIL, d.DEV_A_EMAIL, d.DEV_A1_EMAIL, d.DEV_B1_EMAIL],
+    email: [d.DEV_EMAIL, d.DEV_A_EMAIL, d.DEV_A1_EMAIL, d.DEV_B_EMAIL],
     first: ["default", "teamDefaultA", "teamA", "teamB"],
     last:["default", "orgsA", "orgsA", "orgB"],
     password: [d.DEV_PASS, d.DEV_PASS, d.DEV_PASS, d.DEV_PASS],
@@ -51,7 +51,7 @@ describe('Prerequisits', () => {
   const catalogueTeamADetails = {
     name: d.CUSTOM_CATALOGUE_TEAM_A_NAME,
     path: "pathTeamA",
-    visibility: "Custom",
+    visibility: "Private",
     team: "teamA | orgA",
     products: d.PRODUCT_TEAM_A_NAME,
     plans: d.GOLD_PLAN_NAME 

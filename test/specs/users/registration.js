@@ -2,6 +2,7 @@ import { main_page } from '../../../lib/pom/Main_page';
 import { registration_page } from '../../../lib/pom/Registration_page';
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
+import { portal_page } from '../../../lib/pom/Portal_page';
 
 describe('Registation without invite code', () => {
   var registrationDetails = {
@@ -26,7 +27,7 @@ describe('Registation without invite code', () => {
   it('User is able to login', () => {
     $('*=GO TO LOGIN').click();
     login_page.login(registrationDetails.email, registrationDetails.password);
-    wdioExpect(browser).toHaveUrlContaining("/dashboard");
+    expect(portal_page.USER_BUTTON).toBeDisplayed();
   });
 
   it('User can see information about portal beeing disabled', () => {

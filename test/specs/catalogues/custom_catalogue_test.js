@@ -1,21 +1,40 @@
 import { login_page } from '../../../lib/pom/Login_page';
-import { portal_catalogues_page } from '../../../lib/pom/Portal_catalogues_page';
+import { portal_page } from '../../../lib/pom/Portal_page';
+import { dev_catalogues_page } from '../../../lib/pom/Dev_catalogues_page';
 import { main_page } from '../../../lib/pom/Main_page';
-import { PRODUCT_PUBLIC_NAME, PRODUCT_PRIVATE_NAME } from '../../../config_variables';
+import variables from '../../../config_variables';
 
-xdescribe('Custom catalogue visibility', () => {
-    const expectedCountOfVisibleProducts = 2;
+describe('Custom catalogue visibility - already created catalogues', () => {
+    const privateAndPublicProducts = [variables.PRODUCT_PUBLIC_NAME, variables.PRODUCT_PRIVATE_NAME];
+    const expectedBaselineForDevA = {
+        countOfProducts: 4,
+        productsNames: [...privateAndPublicProducts, variables.PRODUCT_ORG_A_NAME, variables.PRODUCT_TEAM_A_NAME]
+    };
 
     before(() => {
         login_page.open();
         login_page.loginAsDevA();
       });
 
-    it('Logged user can see Public, Private and assigned Catalogue products', () => {
+    it('Logged user (devA@tyk.io) can see Public, Private and assigned Catalogue products', () => {
         main_page.CATALOGUES_BUTTON.click();
-        const cataloguesCardsArray = portal_catalogues_page.getAllDisplayedProducts();
-        expect(cataloguesCardsArray).to.have.lengthOf(expectedCountOfVisibleProducts, "Incorrect number of visible catalogues!");
-        const cataloguesNames = portal_catalogues_page.getNamesOfDisplayedProducts();
-        expect(cataloguesNames).to.have.members([PRODUCT_PUBLIC_NAME, PRODUCT_PRIVATE_NAME]);
+        const cataloguesNames = dev_catalogues_page.getNamesOfDisplayedProducts();
+        expect(cataloguesNames).to.have.members(expectedBaselineForDevA.productsNames);
+    });
+
+    it('After log-out user can see only public products', () => {
+        portal_page.logOut();
+        main_page.CATALOGUES_BUTTON.click();
+        const cataloguesNames = dev_catalogues_page.getNamesOfDisplayedProducts();
+        expect(cataloguesNames).to.have.members([variables.PRODUCT_PUBLIC_NAME]);
+    });
+
+    it('Logged user (devA1@tyk.io) can see only Public and Private products', () => {
+        login_page.open();
+        login_page.loginAsDevA();
+        main_page.CATALOGUES_BUTTON.click();
+        const cataloguesNames = dev_catalogues_page.getNamesOfDisplayedProducts();
+        expect(cataloguesNames).to.have.members(privateAndPublicProducts, 
+            "There are no catalogues assigned to devA1@tyk.io user team. User should see only Public and Private products");
     });
 });
