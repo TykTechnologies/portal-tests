@@ -1,6 +1,6 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { dev_catalogues_page } from '../../../lib/pom/Dev_catalogues_page';
-import { portal_products_page } from '../../../lib/pom/Portal_products_page';
+import { dev_products_page } from '../../../lib/pom/Dev_products_page';
 import { main_page } from '../../../lib/pom/Main_page';
 import { PRODUCT_PUBLIC_NAME } from '../../../config_variables';
 
@@ -25,6 +25,6 @@ describe('Public catalogue', () => {
         const PUBLIC_CATALOGUE = cataloguesCardsArray[0];
         PUBLIC_CATALOGUE.MORE_INFO_BUTTON.click();
         browser.pause(2000);
-        wdioExpect(portal_products_page.ADD_TO_CART_BUTTON).not.toBeDisplayed();
+        wdioExpect(dev_products_page.ADD_TO_CART_BUTTON).not.toBeDisplayed();
     });
 });
