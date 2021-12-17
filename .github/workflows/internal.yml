@@ -46,7 +46,7 @@ jobs:
     - name: Check if test framework branch exists
       id: check_test_branch
       run: |
-        echo "::set-output name=branch::main"
+        echo "::set-output name=branch::master"
         if git ls-remote --exit-code --heads https://github.com/TykTechnologies/portal ${{ github.head_ref	}}; then
           echo "::set-output name=branch::${{ github.head_ref	}}"
         fi
