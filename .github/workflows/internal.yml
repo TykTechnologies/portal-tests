@@ -69,8 +69,8 @@ jobs:
     - name: Copy of portal.db
       run: |
         pwd &
-        cp portal-tests/ci/portal.db .
-      working-directory: portal
+        cp ci/portal.db /home/runner/work/portal-tests/portal-tests/portal
+      working-directory: portal-tests
 
     - name: start portal
       run: GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal &
