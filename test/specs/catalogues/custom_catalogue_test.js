@@ -34,7 +34,7 @@ describe('Custom catalogue visibility - already created catalogues', () => {
         login_page.loginAsDevA();
         main_page.CATALOGUES_BUTTON.click();
         const cataloguesNames = dev_catalogues_page.getNamesOfDisplayedProducts();
-        expect(cataloguesNames).to.have.members(privateAndPublicProducts, 
-            "There are no catalogues assigned to devA1@tyk.io user team. User should see only Public and Private products");
+        expect(cataloguesNames).to.have.members([...privateAndPublicProducts, variables.PRODUCT_ORG_A_NAME], 
+            "User is assigned to teamA1. Should see only Public, Private and catalogues from orgA. We have visibility issue!");
     });
 });
