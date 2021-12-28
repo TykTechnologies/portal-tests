@@ -34,4 +34,10 @@ describe('Creating new API consumer', () => {
         wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).toBeDisplayed();
     });
 
+    it('Admin is able to delete the new api consumer', () => {
+        const rowNumber = api_consumers_page.TABLE.getRowNumberOfCellWithValue(`${userDetails.update_first} ${userDetails.last}`);
+        api_consumers_page.TABLE.deleteRow(rowNumber);
+        wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).not.toBeDisplayed();
+    });
+
 });
