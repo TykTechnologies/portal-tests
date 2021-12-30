@@ -42,7 +42,7 @@ describe('Prerequisits', () => {
   const catalogueOrgADetails = {
     name: d.CUSTOM_CATALOGUE_ORG_A_NAME,
     path: "pathA",
-    visibility: "Custom",
+    visibility: "Private",
     team: "orgA All users | orgA",
     products: d.PRODUCT_ORG_A_NAME,
     plans: d.BRONZE_PLAN_NAME 
@@ -51,7 +51,7 @@ describe('Prerequisits', () => {
   const catalogueTeamADetails = {
     name: d.CUSTOM_CATALOGUE_TEAM_A_NAME,
     path: "pathTeamA",
-    visibility: "Custom",
+    visibility: "Private",
     team: "teamA | orgA",
     products: d.PRODUCT_TEAM_A_NAME,
     plans: d.GOLD_PLAN_NAME 
@@ -179,9 +179,5 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
     admin_page.CATALOGUES_BUTTON.click();
     catalogues_page.addCatalogue(catalogueTeamADetails);
   });
-
-    it('make free plan auto approving', () => {
-      admin_page.PLANS_BUTTON.click();
-    });
 
 });
