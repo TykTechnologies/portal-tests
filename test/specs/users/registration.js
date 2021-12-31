@@ -27,7 +27,7 @@ describe('Registation without invite code', () => {
   it('User is able to login', () => {
     $('*=GO TO LOGIN').click();
     login_page.login(registrationDetails.email, registrationDetails.password);
-    expect(portal_page.USER_BUTTON).toBeDisplayed();
+    wdioExpect(portal_page.USER_BUTTON).toBeDisplayed();
   });
 
   it('User can see information about portal beeing disabled', () => {
