@@ -28,7 +28,7 @@ module.exports = {
     DEV_A_EMAIL: "devA@tyk.io",
     DEV_A1_EMAIL: "devA1@tyk.io",
     TEAM_A1_INVITE_CODE: "d46c534dfab749289cc54726cb8f9ecd",
-    DEV_B_EMAIL: "devB@tyk.io",
+    DEV_B_EMAIL: "devB1@tyk.io",
     DEV_PASS: "test123",
     TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
@@ -55,7 +55,7 @@ module.exports = {
     CUSTOM_CATALOGUE_TEAM_A_NAME: "Team A Catalogue",
     PRODUCT_TEAM_A_NAME: "product_team_a",
     CUSTOM_API_TEAM_A_NAME: "custom_api_team_a",
-    CUSTOM_API_TEAM_A_NAME: "custom_api_team_a_bis",
+    CUSTOM_API_TEAM_A_NAME_BIS: "custom_api_team_a_bis",
     //plan: GOLD_PLAN_NAME
 
     CUSTOM_CATALOGUE_TEAM_B_NAME: "Team B Catalogue",

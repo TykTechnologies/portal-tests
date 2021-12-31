@@ -1,5 +1,5 @@
 import { login_page } from '../../../lib/pom/Login_page';
-import { portal_catalogues_page } from '../../../lib/pom/Portal_catalogues_page';
+import { portal_catalogues_page } from '../../../lib/pom/Dev_catalogues_page';
 import { main_page } from '../../../lib/pom/Main_page';
 import { PRODUCT_PUBLIC_NAME, PRODUCT_PRIVATE_NAME } from '../../../config_variables';
 
