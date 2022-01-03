@@ -34,4 +34,10 @@ describe('Creating new users', () => {
         wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).toBeDisplayed();
     });
 
+    it('Admin is able to delete the new admin user', () => {
+        const rowNumber = admin_users_page.TABLE.getRowNumberOfCellWithValue(`${userDetails.update_first} ${userDetails.last}`);
+        admin_users_page.TABLE.deleteRow(rowNumber);
+        wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).not.toBeDisplayed();
+    });
+
 });
