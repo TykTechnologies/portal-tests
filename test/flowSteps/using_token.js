@@ -23,6 +23,10 @@ module.exports = (appName) => {
       approved_request_object.expectApprovedState();
     });
 
+    xit('Provisioning requests should not be displayed as pending anymore', () => {
+
+    });
+
     it('Developer should be able to get Token', () => {
       token = approved_request_object.getToken();
       expect(token).to.not.be.empty;

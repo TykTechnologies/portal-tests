@@ -55,12 +55,12 @@ module.exports = {
     CUSTOM_CATALOGUE_TEAM_A_NAME: "Team A Catalogue",
     PRODUCT_TEAM_A_NAME: "product_team_a",
     CUSTOM_API_TEAM_A_NAME: "custom_api_team_a",
-    CUSTOM_API_TEAM_A_NAME: "custom_api_team_a_bis",
+    CUSTOM_API_TEAM_A_NAME_BIS: "custom_api_team_a_bis",
     //plan: GOLD_PLAN_NAME
 
     CUSTOM_CATALOGUE_TEAM_B_NAME: "Team B Catalogue",
     PRODUCT_TEAM_B_NAME: "product_team_b",
-    CUSTOM_API_TEAM_A_NAME: "custom_api_team_b",
+    CUSTOM_API_TEAM_B_NAME: "custom_api_team_b",
 
     PRODUCT_1_NAME: "product_1",
     API_1_NAME: "api_1",
