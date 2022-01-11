@@ -69,7 +69,8 @@ module.exports = {
     PRODUCT_TAG_NAME: "product_with_tag",
     PLAN_TAG_NAME: "plan_with_tag",
 
-    FREE_PLAN_NAME: "free_plan", //expiry: 1h, rate: 2/10s, quota: 3/1h 
+    FREE_PLAN_NAME: "free_plan", //expiry: 1h, rate: 5/85s, quota: 3/1h
+    FREE_PLAN_RATE_LIMIT: 5, 
     BRONZE_PLAN_NAME: "bronze_plan", //expiry: 6h, rate: 50/60s, quota: 111/1month
     SILVER_PLAN_NAME: "silver_plan", //expiry: 12h, rate: 1000/135s, quota: 5000/1week
     GOLD_PLAN_NAME: "gold_plan", //expiry: never, rate: 1001/1s, quota: unlimited
