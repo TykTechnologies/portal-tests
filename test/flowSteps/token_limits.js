@@ -27,6 +27,7 @@ module.exports = (appName) => {
       token = approved_request_object.getToken();
       expect(token).to.not.be.empty;
       for (let requestNumber = 1; requestNumber <= FREE_PLAN_RATE_LIMIT; requestNumber++) {
+        console.log(`>>> request number ${requestNumber}`);
         gw_connection.expectTokenWorksWithGW(PUBLIC_API_NAME, token);
       }
     });
