@@ -6,11 +6,12 @@ import { dev_apps_page } from '../../lib/pom/Dev_apps_page';
 import { uuid } from 'uuidv4';
 import { PRODUCT_PUBLIC_NAME, FREE_PLAN_NAME} from '../../config_variables';
 
-const Portal_catalogue_card_object = require('../../lib/wrappers/portal_catalogue_card_object');
 var appName;
 
-describe('Requesting the access key with auto-approve', () => {
-  appName = "test app 1 " + uuid();
+const Portal_catalogue_card_object = require('../../lib/wrappers/portal_catalogue_card_object');
+  
+describe('Requesting the access key', () => {
+  appName = "test app " + uuid();
 
   before(() => {
     login_page.open();
