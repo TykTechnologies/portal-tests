@@ -12,7 +12,7 @@ module.exports = (appName) => {
     const gw_connection = new GW_connection();
     before(() => {
       login_page.open();
-      login_page.loginAsDevA();
+      login_page.loginAsDevA1();
     });
 
     it('Developer should see approved provisioning requet', () => {
