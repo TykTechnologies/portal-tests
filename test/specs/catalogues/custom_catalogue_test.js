@@ -29,9 +29,9 @@ describe('Custom catalogue visibility - already created catalogues', () => {
         expect(cataloguesNames).to.have.members([variables.PRODUCT_PUBLIC_NAME]);
     });
 
-    it('Logged user (devA1@tyk.io) can see only Public and Private products', () => {
+    it('Logged user (devA1@tyk.io) can see only Public, Private and orgA products', () => {
         login_page.open();
-        login_page.loginAsDevA();
+        login_page.loginAsDevA1();
         main_page.CATALOGUES_BUTTON.click();
         const cataloguesNames = dev_catalogues_page.getNamesOfDisplayedProducts();
         expect(cataloguesNames).to.have.members([...privateAndPublicProducts, variables.PRODUCT_ORG_A_NAME], 
