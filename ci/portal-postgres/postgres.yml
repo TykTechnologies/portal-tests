@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+    portal-mariadb:
+        container_name: portal-postgres
+        image: postgres:12-alpine
+        environment:
+            - POSTGRES_PASSWORD=secr3t
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        volumes:
+            - ./volume/data:/var/lib/postgresql/data
+        ports:
+           - "5432:5432"
