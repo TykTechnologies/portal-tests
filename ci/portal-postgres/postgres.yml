@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+
+  portal-postgres:
+    image: postgres:10-alpine
+    restart: on-failure:5
+    environment:
+      POSTGRES_PASSWORD: secr3t
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volume/data:/var/lib/postgresql/data

@@ -28,7 +28,7 @@ module.exports = {
     DEV_A_EMAIL: "devA@tyk.io",
     DEV_A1_EMAIL: "devA1@tyk.io",
     TEAM_A1_INVITE_CODE: "26df5807666c48faad585b737c9a4806",
-    DEV_B1_EMAIL: "devB1@tyk.io",
+    DEV_B_EMAIL: "devB@tyk.io",
     DEV_PASS: "test123",
     TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
