@@ -1,4 +1,4 @@
-name: UI Bootstrap Tests
+name: UI nightly Tests
 
 on:
   push:
@@ -69,15 +69,6 @@ jobs:
       run: go build -o dev-portal
       working-directory: portal
 
-    - name: start portal
-      run: |
-        GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal -bootstrap -user=auto_test@tyk.io -pass=test123 -provider-name "TykPro@bootstrap" \
-        -provider-type "tyk-pro" \
-        -provider-data '{"URL": "http://localhost:3000", "Secret": "eb18a1d86ae7492f55e6190ffde6ad55", "OrgID": "617006c1829b6f0001c6c039","PoliciesTags":["portal_tag"]}'&
-      env:
-        PORTAL_LICENSEKEY: ${{secrets.DASH_LICENSE}}
-      working-directory: portal
-
     - name: Starting Tyk Pro
       env:
         TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
@@ -93,7 +84,16 @@ jobs:
     - name: Waiting for dashboard
       run: |
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
-      timeout-minutes: 15  
+      timeout-minutes: 15
+
+    - name: start portal
+      run: |
+        GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal -bootstrap -user=auto_test@tyk.io -pass=test123 -provider-name "TykPro@bootstrap" \
+        -provider-type "tyk-pro" \
+        -provider-data '{"URL": "http://localhost:3000", "Secret": "eb18a1d86ae7492f55e6190ffde6ad55", "OrgID": "617006c1829b6f0001c6c039","PoliciesTags":["portal_tag"]}'&
+      env:
+        PORTAL_LICENSEKEY: ${{secrets.DASH_LICENSE}}
+      working-directory: portal  
 
     - name: Execute UI tests
       id: test_execution
@@ -116,7 +116,7 @@ jobs:
       working-directory: portal-tests
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        WDIO_TEST_ENV: ${{ github.ref }} (commit used -> ${{ github.event.head_commit.message }})
+        WDIO_TEST_ENV: Nightly testing on clean env ${{ github.ref }} ${{ github.event.head_commit.message }}
         FRAMEWORK_REPO: ${{ github.repository }}
         EVENT_TRIGGER: ${{ github.event_name }} (${{ github.actor }})
         JOB_RUN_ID: ${{ github.run_id }}
