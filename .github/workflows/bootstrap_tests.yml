@@ -1,0 +1,136 @@
+name: UI Bootstrap Tests
+
+on:
+  push:
+    branches:
+      - '**bootstrap**'
+    tags:
+      - 'v*'
+  schedule:
+    - cron: '0 7 * * 1,3,5'
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        go-version: [1.16.x]
+        platform: [ubuntu-latest]
+        arch: [amd64]
+        node-version: [15.x]
+    runs-on: ${{ matrix.platform }}
+    
+    steps:
+    - name: Install Go ${{ matrix.go-version }}
+      uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+    
+    - name: Install Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2.5.0
+      with:
+        node-version: ${{ matrix.node-version }}
+    
+    - name: Fix private module deps
+      env:
+        TOKEN: '${{ secrets.ORG_GH_TOKEN }}'
+      run: >
+        git config --global url."https://${TOKEN}@github.com".insteadOf "https://github.com"
+
+    - name: Checkout of Framework
+      uses: actions/checkout@v2
+      with:
+        path: portal-tests
+        token: ${{ secrets.ORG_GH_TOKEN }}
+        submodules: true
+
+    - name: Check if test framework branch exists
+      id: check_test_branch
+      run: |
+        echo "::set-output name=branch::master"
+        if git ls-remote --exit-code --heads https://github.com/TykTechnologies/portal ${{ github.head_ref	}}; then
+          echo "::set-output name=branch::${{ github.head_ref	}}"
+        fi
+        if git ls-remote --exit-code --heads https://github.com/TykTechnologies/portal ${{ github.ref }}; then
+          echo "::set-output name=branch::${{ github.ref	}}"
+        fi
+
+    - name: Checkout of Portal
+      uses: actions/checkout@master
+      with:
+        repository: TykTechnologies/portal
+        path: portal
+        token: ${{ secrets.ORG_GH_TOKEN }}
+        ref: ${{ steps.check_test_branch.outputs.branch	 }}
+
+    - name: build Portal
+      run: go build -o dev-portal
+      working-directory: portal
+
+    - name: start portal
+      run: |
+        GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal -bootstrap -user=auto_test@tyk.io -pass=test123 -provider-name "TykPro@bootstrap" \
+        -provider-type "tyk-pro" \
+        -provider-data '{"URL": "http://localhost:3000", "Secret": "eb18a1d86ae7492f55e6190ffde6ad55", "OrgID": "617006c1829b6f0001c6c039","PoliciesTags":["portal_tag"]}'&
+      env:
+        PORTAL_LICENSEKEY: ${{secrets.DASH_LICENSE}}
+      working-directory: portal
+
+    - name: Starting Tyk Pro
+      env:
+        TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
+      run: |
+        docker-compose -f ci/tyk_dashboard.yml up -d
+      working-directory: portal-tests
+
+    - name: Install test dependecies
+      run: |
+        npm ci
+      working-directory: portal-tests
+
+    - name: Waiting for dashboard
+      run: |
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
+      timeout-minutes: 15  
+
+    - name: Execute UI tests
+      id: test_execution
+      run: |
+        WDIO_HEADLESS=1 npm run test -- --spec test/nightlyBuild/nightly_build_flow.js
+      working-directory: portal-tests
+    
+    - name: Archive UI test report
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+        name: ui-test-report
+        path: ./portal-tests/results/report/index.html
+    
+    - name: Slack notify
+      if: ${{ always() }}
+      run: |
+        export GIT_BRANCH=$(git branch --show-current) 
+        npm run notify-slack
+      working-directory: portal-tests
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        WDIO_TEST_ENV: ${{ github.ref }} (commit used -> ${{ github.event.head_commit.message }})
+        FRAMEWORK_REPO: ${{ github.repository }}
+        EVENT_TRIGGER: ${{ github.event_name }} (${{ github.actor }})
+        JOB_RUN_ID: ${{ github.run_id }}
+        JOB_NAME: ${{ github.job }}
+
+    - name: Comment on PR
+      if: ${{ always() }} && github.event.issue.pull_request
+      uses: mshick/add-pr-comment@v1
+      with:
+        message: |
+          **UI tests result: ${{ steps.test_execution.outcome }}** ${{ env.STATUS }} 
+          Branch used: ${{ github.ref }}
+          Commit: ${{ github.event.after }} ${{ github.event.commits[0].message }}
+          Triggered by: ${{ github.event_name }} (@${{ github.actor }})
+          [Execution page](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
+        repo-token: ${{ secrets.ORG_GH_TOKEN }}
+        allow-repeats: true
+      env:
+        STATUS: "${{ steps.test_execution.outcome == 'success' && ':white_check_mark:' || ':no_entry_sign:' }}"
