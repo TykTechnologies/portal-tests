@@ -13,6 +13,9 @@ module.exports = {
     DASHBOARD_ADMIN_API: TYK_PRO_URL + 'admin/',
     USERS_PATH: "users/",
 
+    EMAIL_SERVER_PORT: 6061, 
+    EMAIL_SERVER_API_URL: "http://localhost:8025", 
+
     USER_EMAIL: process.env.USER_EMAIL || "auto_test@tyk.io",
     USER_PASSWORD: process.env.USER_PASSWORD || "test123",
 
@@ -79,4 +82,17 @@ module.exports = {
     //2nd org
     ORG_2_TYK_SECRET: "134257b2eb8c46ac554c9e820f71e38b",
     ORG_2_TYK_ORG_ID: "61a8ba54e35eb50001fe4449",
+
+    //email settings
+    EMAIL_FROM_ADDRESS:"portal_admin@tyk.io",
+    EMAIL_DEFAULT_FROM_ADDRESS:"portal@tyk.io",
+    RESET_EMAIL_SUBJECT:"Reset password",
+    APPROVE_EMAIL_SUBJECT:"Provisioning request was approved",
+    REJECT_EMAIL_SUBJECT:"Provisioning request was rejected",
+    REGISTER_EMAIL_SUBJECT:"Register to portal",
+    INVITE_EMAIL_SUBJECT:"Invitation to portal",
+    SMTP_HOST:"localhost",
+    SMTP_PORT:"1025",
+    SMTP_USER:"abc",
+    SMTP_PASS:"xyz",
 };
