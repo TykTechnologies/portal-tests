@@ -1,7 +1,8 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { providers_page } from '../../../lib/pom/Providers_page';
-import { ORG_2_TYK_ORG_ID, ORG_2_TYK_SECRET, TYK_PRO_URL, PROVIDER_NAME, PRODUCT_COUNT, PLAN_COUNT} from '../../../config_variables';
+import { ORG_2_TYK_ORG_ID, ORG_2_TYK_SECRET, TYK_PRO_URL, TYK_ORG_ID, TYK_SECRET,
+     PROVIDER_NAME, PRODUCT_COUNT, PLAN_COUNT, TAG_NAME} from '../../../config_variables';
 
 describe('Synchronize with Tyk Pro', () => {
   const expectedCountOfProducts = "2";
@@ -18,6 +19,15 @@ describe('Synchronize with Tyk Pro', () => {
     org_id: ORG_2_TYK_ORG_ID,
     secret: ORG_2_TYK_SECRET   
   };
+  const providerWithTagDetails = {
+    name: "provider with Tag",
+    url: TYK_PRO_URL,
+    org_id: TYK_ORG_ID,
+    secret: TYK_SECRET,
+    tag: TAG_NAME   
+  };
+  const expectedCountOfProductsWithTag = "1";
+  const expectedCountOfPlansWithTag = "0";
 
   before(() => {    
     login_page.open();
@@ -82,6 +92,20 @@ describe('Synchronize with Tyk Pro', () => {
     providers_page.TABLE.deleteRow(providerRowNumberSingle);
     const wasProviderSingleDeleted = providers_page.TABLE.isCellWithTextNotDisplayed(providerDetailsSingle.name);
     expect(wasProviderSingleDeleted).to.be.true;
+  });
+
+  it("Admin is able to add provider with tag filtering", () => {
+    providers_page.addProvider(providerWithTagDetails);
+    wdioExpect(providers_page.TABLE.$(`div*=${providerWithTagDetails.name}`)).toBeDisplayed();
+    providers_page.SYNCHRONIZE_BUTTON.click();
+    providers_page.DIALOG_OK_BUTTON.click();
+    const providerWithTagRowNumber = providers_page.TABLE.getRowNumberOfCellWithValue(providerWithTagDetails.name);
+    console.log(`>>> checking the provider in row ${providerWithTagRowNumber}`);
+    const productsCell = providers_page.getTabelProductsCellFromRow(providerWithTagRowNumber);
+    const plansCell = providers_page.getTabelPlansCellFromRow(providerWithTagRowNumber);
+    wdioExpect(productsCell).toHaveText(expectedCountOfProductsWithTag);
+    wdioExpect(plansCell).toHaveText(expectedCountOfPlansWithTag);
+    providers_page.TABLE.deleteRow(providerWithTagRowNumber);
   });
   
 });
