@@ -66,14 +66,8 @@ jobs:
       run: go build -o dev-portal
       working-directory: portal
 
-    - name: Copy of portal.db
-      run: |
-        pwd &
-        cp ci/portal.db /home/runner/work/portal-tests/portal-tests/portal
-      working-directory: portal-tests
-
     - name: start portal
-      run: GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal &
+      run: GOPATH=/home/runner/go RAAVA_HOSTPORT=3001 ./dev-portal -bootstrap -user=auto_test@tyk.io -pass=test123 &
       env:
         PORTAL_LICENSEKEY: ${{secrets.DASH_LICENSE}}
       working-directory: portal
@@ -94,6 +88,11 @@ jobs:
       run: |
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
       timeout-minutes: 15  
+    
+    - name: Execute prerequisites
+      run: |
+          npm run headless-test -- --spec test/flowSteps/prerequisits.js
+      working-directory: portal-tests
 
     - name: Execute UI tests
       id: test_execution
