@@ -91,7 +91,7 @@ jobs:
     
     - name: Execute prerequisites
       run: |
-          npm run headless-test -- --spec test/flowSteps/prerequisits.js
+          npm run headless-prerequisits
       working-directory: portal-tests
 
     - name: Execute UI tests
