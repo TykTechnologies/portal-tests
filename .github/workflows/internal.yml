@@ -47,7 +47,7 @@ jobs:
       env:
         TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
       run: |
-        docker-compose -f ci/tyk_dashboard.yml up -d
+        docker-compose -f ci/tyk_dashboard.yml up
       working-directory: portal-tests
 
     - name: Check if Portal branch exists
@@ -84,9 +84,10 @@ jobs:
         npm ci
       working-directory: portal-tests
 
-    - name: Waiting for dashboard
+    - name: Waiting for dockers
       run: |
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5 && echo "waiting for keycloak '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
       timeout-minutes: 15  
     
     - name: Execute prerequisites
