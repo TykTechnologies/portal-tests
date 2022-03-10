@@ -70,7 +70,7 @@ module.exports = {
 
     CUSTOM_CATALOGUE_TEAM_D_NAME: "DCR_1",
     PRODUCT_TEAM_D_NAME: "keycloak_product_X",
-    CUSTOM_API_TEAM_D_NAME: "keycloak_X",
+    CUSTOM_API_TEAM_D_NAME: "keycloak_x",
 
     PRODUCT_1_NAME: "product_1",
     API_1_NAME: "api_1",
