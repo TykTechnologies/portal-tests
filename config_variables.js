@@ -23,15 +23,18 @@ module.exports = {
     INVITE_ORG: "inviteTestOrg",
     ORG_A_NAME: "orgA",
     ORG_B_NAME: "orgB",
+    ORG_D_NAME: "orgD",
     INVITE_TEAM: "inviteTestTeam",
     TEAM_A_NAME: "teamA",
     TEAM_A1_NAME: "teamA1",
     TEAM_B_NAME: "teamB",
+    TEAM_D_NAME: "teamD",
     DEV_EMAIL: "dev@tyk.io",
     DEV_A_EMAIL: "devA@tyk.io",
     DEV_A1_EMAIL: "devA1@tyk.io",
     TEAM_A1_INVITE_CODE: "26df5807666c48faad585b737c9a4806",
     DEV_B_EMAIL: "devB@tyk.io",
+    DEV_D_EMAIL: "devD@tyk.io",
     DEV_PASS: "test123",
     TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
@@ -65,6 +68,10 @@ module.exports = {
     PRODUCT_TEAM_B_NAME: "product_team_b",
     CUSTOM_API_TEAM_B_NAME: "custom_api_team_b",
 
+    CUSTOM_CATALOGUE_TEAM_D_NAME: "DCR_1",
+    PRODUCT_TEAM_D_NAME: "keycloak_product_X",
+    CUSTOM_API_TEAM_D_NAME: "keycloak_X",
+
     PRODUCT_1_NAME: "product_1",
     API_1_NAME: "api_1",
 
@@ -95,4 +102,7 @@ module.exports = {
     SMTP_PORT:"1025",
     SMTP_USER:"abc",
     SMTP_PASS:"xyz",
+
+    KEYCLOAK_TOKEN: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjNWE0NzljNC0wNWNhLTQ3MzMtOTc1MS05Njc4OWM1NWJiM2EifQ.eyJleHAiOjE2ODk5NTI3MzQsImlhdCI6MTY0Njc1MjczNCwianRpIjoiYmM0NTk0MzktZmVmMi00YzVlLWExOWEtNWIzZDJmMTA2Y2Y2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDkwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA5MC9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.J9H1UurwjdGoDB9ZFbsyajmgQKG3FCLFVck3TC1Yxro",
+    KEYCLOAK_WELL_KNOWN_URL: "http://localhost:8090/auth/realms/master/.well-known/openid-configuration"
 };

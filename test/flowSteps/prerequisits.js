@@ -7,19 +7,22 @@ import { providers_page } from '../../lib/pom/Providers_page';
 import { org_page } from '../../lib/pom/Org_page';
 import { teams_page } from '../../lib/pom/Teams_page';
 import { catalogues_page } from '../../lib/pom/Catalogues_page';
+import { api_products_page } from '../../lib/pom/Api_products_page';
+import { general_settings_page } from '../../lib/pom/General_settings_page';
+import { app_registration_page } from '../../lib/pom/App_registration_page';
 import * as d from'../../config_variables';
 
 describe('Prerequisits', () => {
 
-  const orgsList = [d.INVITE_ORG, d.ORG_A_NAME, d.ORG_B_NAME];
+  const orgsList = [d.INVITE_ORG, d.ORG_A_NAME, d.ORG_B_NAME, d.ORG_D_NAME,];
   const teamsList = [[d.INVITE_ORG, d.INVITE_TEAM],[d.ORG_A_NAME, d.TEAM_A_NAME],
-    [d.ORG_A_NAME, d.TEAM_A1_NAME], [d.ORG_B_NAME, d.TEAM_B_NAME]];
+    [d.ORG_A_NAME, d.TEAM_A1_NAME], [d.ORG_B_NAME, d.TEAM_B_NAME], [d.ORG_D_NAME, d.TEAM_D_NAME]];
   let devsList = {
-    email: [d.DEV_EMAIL, d.DEV_A_EMAIL, d.DEV_A1_EMAIL, d.DEV_B_EMAIL],
-    first: ["default", "teamA", "teamA1", "teamB"],
-    last:["default", "orgsA", "orgsA", "orgB"],
-    password: [d.DEV_PASS, d.DEV_PASS, d.DEV_PASS, d.DEV_PASS],
-    inviteCode: ["", "", "", ""]
+    email: [d.DEV_EMAIL, d.DEV_A_EMAIL, d.DEV_A1_EMAIL, d.DEV_B_EMAIL, d.DEV_D_EMAIL],
+    first: ["default", "teamA", "teamA1", "teamB", "teamD"],
+    last:["default", "orgsA", "orgsA", "orgB", "DCR"],
+    password: [d.DEV_PASS, d.DEV_PASS, d.DEV_PASS, d.DEV_PASS, d.DEV_PASS],
+    inviteCode: ["", "", "", "", ""]
   };
 
   const inviteCodeDetails = {
@@ -31,6 +34,7 @@ describe('Prerequisits', () => {
   const inviteCodeA = {...inviteCodeDetails, team:`${d.TEAM_A_NAME} | ${d.ORG_A_NAME}`};
   const inviteCodeA1 = {...inviteCodeDetails, team:`${d.TEAM_A1_NAME} | ${d.ORG_A_NAME}`};
   const inviteCodeB1 = {...inviteCodeDetails, team:`${d.TEAM_B_NAME} | ${d.ORG_B_NAME}`};
+  const inviteCodeD = {...inviteCodeDetails, team:`${d.TEAM_D_NAME} | ${d.ORG_D_NAME}`};
   
   const providerDetails = {
     name: d.PROVIDER_NAME,
@@ -55,6 +59,23 @@ describe('Prerequisits', () => {
     team: "teamA | orgA",
     products: d.PRODUCT_TEAM_A_NAME,
     plans: d.GOLD_PLAN_NAME 
+  };
+
+  const catalogueTeamDDetails = {
+    name: d.CUSTOM_CATALOGUE_TEAM_D_NAME,
+    path: "pathTeamD",
+    visibility: "Private",
+    team: "teamD | orgD",
+    products: d.PRODUCT_TEAM_D_NAME,
+    plans: d.FREE_PLAN_NAME 
+  };
+
+  const clientDetails = {
+    name:"keycloak_type1",
+    description:"keycloak_type1_description",
+    response_types:"code",
+    grant_types:"authorization_code",
+    token_endpoint:"client_secret_post",
   };
 
   before(() => {
@@ -111,6 +132,16 @@ describe('Prerequisits', () => {
     browser.pause(2000);
     devsList.inviteCode[3] = invite_codes_page.getCodeFromRow(0);
     console.log(`Invite code created: ${devsList.inviteCode[3]}`);
+   });
+
+   it('Creating invite code inviteCodeD', () => {
+    admin_page.INVITE_CODES_BUTTON.click();
+    invite_codes_page.ADD_BUTTON.click();
+    invite_codes_page.fillNewInviteCodeForm(inviteCodeD);
+    invite_codes_page.SAVE_BUTTON.click();
+    browser.pause(2000);
+    devsList.inviteCode[3] = invite_codes_page.getCodeFromRow(0);
+    console.log(`Invite code created: ${devsList.inviteCode[4]}`);
    });
 
    it('creating users', () => {
@@ -174,6 +205,47 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
   it('add catalogue team A', () => {
     admin_page.CATALOGUES_BUTTON.click();
     catalogues_page.addCatalogue(catalogueTeamADetails);
+  });
+
+  it('add catalogue team D', () => {
+    admin_page.CATALOGUES_BUTTON.click();
+    catalogues_page.addCatalogue(catalogueTeamDDetails);
+  });
+
+  it("Set DCR settings", () => {
+    admin_page.APP_REGISTRATION_BUTTON.click();
+    app_registration_page.PROVIDER_TYPE_DROPDOWN.selectOption("keycloak");
+    app_registration_page.WELL_KNOWN_URL_INPUT.setValue(d.KEYCLOAK_WELL_KNOWN_URL);
+    app_registration_page.ACCESS_TOKEN_INPUT.setValue(d.KEYCLOAK_TOKEN);
+    try{
+      app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked"); //if not checked -> error will be thrown
+    } catch {
+      app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.click();
+    }
+      if (app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked") !== "true") {
+        app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.click();
+      };
+
+    app_registration_page.addClientType(clientDetails);
+    app_registration_page.SAVE_CHANGES_BUTTON.click();
+  });
+
+  it('Enable DCR product', () => {
+    admin_page.API_PRODUCTS_BUTTON.click();
+    api_products_page.TABLE.clickCellWithText(d.PRODUCT_TEAM_D_NAME);
+     if (api_products_page.ENABLE_DCR_CHECKBOX.getAttribute("checked") !== "true") {
+      api_products_page.ENABLE_DCR_CHECKBOX.click();
+    };
+    api_products_page.SCOPES_INPUT.setValue("test_scope");
+    api_products_page.CLIENTS_TYPES_DROPDOWN.clearSlection();
+    api_products_page.CLIENTS_TYPES_DROPDOWN.selectOption(clientDetails.name);
+    api_products_page.SAVE_CHANGES_BUTTON.click();
+  });
+
+  it("Add email settings", function () {
+    admin_page.GENERAL_BUTTON.click();
+    general_settings_page.EMAIL_DEFAULT_FROM_ADDRESS_INPUT.setValue(d.EMAIL_DEFAULT_FROM_ADDRESS);
+    general_settings_page.SAVE_CHANGES_BUTTON.click();
   });
 
 });
