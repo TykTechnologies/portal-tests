@@ -42,8 +42,15 @@ jobs:
         path: portal-tests
         token: ${{ secrets.ORG_GH_TOKEN }}
         submodules: true
+  
+    - name: Starting Tyk Pro
+      env:
+        TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
+      run: |
+        docker-compose -f ci/tyk_dashboard.yml up -d
+      working-directory: portal-tests
 
-    - name: Check if test framework branch exists
+    - name: Check if Portal branch exists
       id: check_test_branch
       run: |
         echo "::set-output name=branch::master"
@@ -71,13 +78,6 @@ jobs:
       env:
         PORTAL_LICENSEKEY: ${{secrets.DASH_LICENSE}}
       working-directory: portal
-
-    - name: Starting Tyk Pro
-      env:
-        TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
-      run: |
-        docker-compose -f ci/tyk_dashboard.yml up -d
-      working-directory: portal-tests
 
     - name: Install test dependecies
       run: |
