@@ -4,8 +4,7 @@ import { dev_products_page } from '../../../lib/pom/Dev_products_page';
 import { main_page } from '../../../lib/pom/Main_page';
 import { PRODUCT_PUBLIC_NAME } from '../../../config_variables';
 
-//Enable after https://tyktech.atlassian.net/browse/TT-4498 will be fixed
-xdescribe('Public catalogue', () => {
+describe('Public catalogue', () => {
     const expectedCountOfVisibleCatalogues = 1;
     const expectedCatalogueName = PRODUCT_PUBLIC_NAME;
 

@@ -9,6 +9,7 @@ import { teams_page } from '../../lib/pom/Teams_page';
 import { catalogues_page } from '../../lib/pom/Catalogues_page';
 import { api_products_page } from '../../lib/pom/Api_products_page';
 import { general_settings_page } from '../../lib/pom/General_settings_page';
+const DropDown_object = require('ui_test_automation/wrappers/DropDown_object');
 import { app_registration_page } from '../../lib/pom/App_registration_page';
 import * as d from'../../config_variables';
 
@@ -147,7 +148,7 @@ describe('Prerequisits', () => {
    it('creating users', () => {
     admin_page.logOut();
     login_page.open();
-    for (let i =0; i <4; i++) {
+    for (let i =0; i < 5; i++) {
       let registrationDetailsWithCode = {
         email: devsList.email[i],
         first: devsList.first[i],
@@ -184,6 +185,7 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
   it('edit public catalogue', () => {
     admin_page.CATALOGUES_BUTTON.click();
     catalogues_page.TABLE.clickCellWithText("Public Catalogue");
+    new DropDown_object(".select2-selection__rendered").selectOption("Public"); //TO BE REMOVED AFTER FIX TT-4498
     catalogues_page.PRODUCTS_DROPDOWN.selectOption(d.PRODUCT_PUBLIC_NAME);
     catalogues_page.PLANS_DROPDOWN.selectOption(d.FREE_PLAN_NAME);
     catalogues_page.SAVE_CHANGES_BUTTON.click();

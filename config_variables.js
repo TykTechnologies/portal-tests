@@ -41,7 +41,7 @@ module.exports = {
     TYK_ADMIN_SECRET: "12345",
 
     //products and plans already created in Tyk db
-    PRODUCT_COUNT: "7",
+    PRODUCT_COUNT: "9",
     PLAN_COUNT: "6",
     
     PUBLIC_CATALOGUE_NAME: "Public Ctalogue",
