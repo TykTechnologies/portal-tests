@@ -39,9 +39,9 @@ services:
            - "27017:27017"
     keycloak: 
         image: jboss/keycloak:16.1.0
-        environment:
-            - KEYCLOAK_USER=admin
-            - KEYCLOAK_PASSWORD=admin
+        # environment:
+        #     - KEYCLOAK_USER=admin
+        #     - KEYCLOAK_PASSWORD=admin
         ports:
             - "8080:8080"
         restart: always
