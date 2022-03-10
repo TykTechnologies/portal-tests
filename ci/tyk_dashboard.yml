@@ -17,7 +17,7 @@ services:
         container_name: tyk-gateway-local
         image: tykio/tyk-gateway:v3.2.1
         ports:
-            - "8080:8080" 
+            - "8081:8081" 
         volumes:
             - ./tyk.conf:/opt/tyk-gateway/tyk.conf
         environment:
@@ -38,12 +38,12 @@ services:
         ports:
            - "27017:27017"
     keycloak: 
-        image: quay.io/keycloak/keycloak:14.0.0
+        image: jboss/keycloak:14.0.0
         environment:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
         ports:
-            - "8090:8080"
+            - "8080:8080"
         restart: always
         volumes:
             - ./keycloak/:/opt/jboss/keycloak/standalone/data/

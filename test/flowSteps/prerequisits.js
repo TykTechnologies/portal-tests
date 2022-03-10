@@ -72,11 +72,11 @@ describe('Prerequisits', () => {
   };
 
   const clientDetails = {
-    name:"keycloak_type1",
-    description:"keycloak_type1_description",
-    response_types:"code",
-    grant_types:"authorization_code",
-    token_endpoint:"client_secret_post",
+    name: d.CLIENT1_TYPE_NAME,
+    description: "keycloak_type1_description",
+    response_types: "code",
+    grant_types: "client_credentials",
+    token_endpoint: "client_secret_post",
   };
 
   before(() => {
@@ -141,7 +141,7 @@ describe('Prerequisits', () => {
     invite_codes_page.fillNewInviteCodeForm(inviteCodeD);
     invite_codes_page.SAVE_BUTTON.click();
     browser.pause(2000);
-    devsList.inviteCode[3] = invite_codes_page.getCodeFromRow(0);
+    devsList.inviteCode[4] = invite_codes_page.getCodeFromRow(0);
     console.log(`Invite code created: ${devsList.inviteCode[4]}`);
    });
 
@@ -219,14 +219,9 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
     app_registration_page.PROVIDER_TYPE_DROPDOWN.selectOption("keycloak");
     app_registration_page.WELL_KNOWN_URL_INPUT.setValue(d.KEYCLOAK_WELL_KNOWN_URL);
     app_registration_page.ACCESS_TOKEN_INPUT.setValue(d.KEYCLOAK_TOKEN);
-    try{
-      app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked"); //if not checked -> error will be thrown
-    } catch {
+    if (app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked") !== "true") {
       app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.click();
-    }
-      if (app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked") !== "true") {
-        app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.click();
-      };
+    };
 
     app_registration_page.addClientType(clientDetails);
     app_registration_page.SAVE_CHANGES_BUTTON.click();

@@ -147,7 +147,7 @@ exports.config = {
             outputDir: './results/report',
             fileName: 'index.html',
             embedImages: true,
-            screenshotStrategy: 'before:click'
+            screenshotStrategy: 'on:error'
         }],
         ['json',{
           outputDir: './results/json'

@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const URL = process.env.URL || "http://localhost:3001/";
 const TYK_PRO_URL = process.env.TYK_PRO_URL || "http://localhost:3000/";
-const TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8080/";
+const TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8081/";
 
 module.exports = {
     URL: URL,
@@ -103,6 +103,8 @@ module.exports = {
     SMTP_USER:"abc",
     SMTP_PASS:"xyz",
 
-    KEYCLOAK_TOKEN: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjNWE0NzljNC0wNWNhLTQ3MzMtOTc1MS05Njc4OWM1NWJiM2EifQ.eyJleHAiOjE2ODk5NTI3MzQsImlhdCI6MTY0Njc1MjczNCwianRpIjoiYmM0NTk0MzktZmVmMi00YzVlLWExOWEtNWIzZDJmMTA2Y2Y2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDkwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA5MC9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.J9H1UurwjdGoDB9ZFbsyajmgQKG3FCLFVck3TC1Yxro",
-    KEYCLOAK_WELL_KNOWN_URL: "http://localhost:8090/auth/realms/master/.well-known/openid-configuration"
+    KEYCLOAK_TOKEN: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1YjAwMmExYi05MGQzLTQwNjMtYmYyMi02ODM5YmEzZTYzOTIifQ.eyJleHAiOjE2OTAxMjk5NzYsImlhdCI6MTY0NjkyOTk3NiwianRpIjoiODYwZjk0ZWEtN2Q0YS00NTM2LTlmODctYzMzOTk5ZjA0YTVkIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.GlpVRUbZkMgrWQYKLUVj7LGy2-3xJ3cvd6c8A7w7qkI",
+    KEYCLOAK_URL: "http://localhost:8080/",
+    KEYCLOAK_WELL_KNOWN_URL: "http://localhost:8080/auth/realms/master/.well-known/openid-configuration",
+    CLIENT1_TYPE_NAME: "keycloak_type1"
 };
