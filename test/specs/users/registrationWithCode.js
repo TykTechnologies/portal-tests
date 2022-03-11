@@ -5,7 +5,8 @@ import { api_consumers_page } from '../../../lib/pom/Api_consumers_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { ORG_A_NAME, TEAM_A1_NAME, TEAM_A1_INVITE_CODE } from '../../../config_variables';
 
-describe('Registation with invite code', () => {
+//disabled when executed after prerequisites
+xdescribe('Registation with invite code', () => {
    var registrationDetailsWithCode = {
     email: "withCode@tyk.io",
     first: "Roger",
