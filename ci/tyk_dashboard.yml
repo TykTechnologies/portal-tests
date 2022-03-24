@@ -41,7 +41,7 @@ services:
         image: jboss/keycloak:16.1.0
         ports:
             - "8080:8080"
-        restart: always
+        # restart: always
         # volumes:
         #     - ./keycloak/:/opt/jboss/keycloak/standalone/data/content/
         #     - ./keycloak/keycoloak.mv.db:/opt/jboss/keycloak/standalone/data/keycoloak.mv.db
