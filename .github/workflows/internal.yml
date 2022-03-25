@@ -86,8 +86,8 @@ jobs:
 
     - name: Waiting for dockers
       run: |
-        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
-        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5 && echo "waiting for keycloak '$(date +"%T")'" && echo "$(curl tyk-dashboard-local:3000/hello/)"; done
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl localhost:3000/hello/)"; done
+        while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5 && echo "waiting for keycloak '$(date +"%T")'" && echo "$(curl localhost:8080)"; done
       timeout-minutes: 15  
     
     - name: Execute prerequisites
