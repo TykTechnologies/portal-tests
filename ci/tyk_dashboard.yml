@@ -52,8 +52,8 @@ services:
     keycloak: 
         image: jboss/keycloak:16.1.0
         environment:
-            - KEYCLOAK_USER=admin
-            - KEYCLOAK_PASSWORD=admin
+            # - KEYCLOAK_USER=admin
+            # - KEYCLOAK_PASSWORD=admin
             - DB_USER=keycloak
             - DB_PASSWORD=password
             - DB_ADDR=keycloak-postgres
