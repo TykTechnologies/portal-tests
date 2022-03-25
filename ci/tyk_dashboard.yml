@@ -37,12 +37,30 @@ services:
             - ./mongo-volume/data:/data/db
         ports:
            - "27017:27017"
+    keycloak-postgres:
+        image: postgres:10-alpine
+        restart: on-failure:5
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=keycloak
+            - POSTGRES_USER=keycloak
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./keycloak-db/data:/var/lib/postgresql/data
     keycloak: 
         image: jboss/keycloak:16.1.0
         environment:
             - KEYCLOAK_USER=admin
             - KEYCLOAK_PASSWORD=admin
+            - DB_USER=keycloak
+            - DB_PASSWORD=password
+            - DB_ADDR=keycloak-postgres
+            - DB_VENDOR=postgres
         ports:
             - "8080:8080"
-        volumes:
-            - ./keycloak/:/opt/jboss/keycloak/standalone/data/
+        # volumes:
+        #     - ./keycloak/:/opt/jboss/keycloak/standalone/data/
+        depends_on:
+            - keycloak-postgres
