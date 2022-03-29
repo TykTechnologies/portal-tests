@@ -16,6 +16,7 @@ module.exports = (appName) => {
             provisioning_requests_page.TABLE.clickCellWithText(appName);
             provisioning_requests_page.APPROVE_BUTTON.click();
             provisioning_requests_page.OK_BUTTON.click();
+            wdioExpect(provisioning_requests_page.APPROVE_SUCCESS_MESSAGE).toBeDisplayed();
             provisioning_requests_page.TABLE.clickCellWithText(appName);
             provisioning_requests_page.expectRequestToHaveApproveState();
         });
