@@ -7,7 +7,7 @@ definer_user=mysql.sys
 definer_host=localhost
 suid=0
 with_check_option=0
-timestamp=2022-01-27 10:45:22
+timestamp=2022-03-30 09:29:55
 create-version=1
 source=SELECT sslver.thread_id,  sslver.variable_value ssl_version,  sslcip.variable_value ssl_cipher, sslreuse.variable_value ssl_sessions_reused FROM performance_schema.status_by_thread sslver  LEFT JOIN performance_schema.status_by_thread sslcip  ON (sslcip.thread_id=sslver.thread_id and sslcip.variable_name=\'Ssl_cipher\') LEFT JOIN performance_schema.status_by_thread sslreuse  ON (sslreuse.thread_id=sslver.thread_id and sslreuse.variable_name=\'Ssl_sessions_reused\')  WHERE sslver.variable_name=\'Ssl_version\'
 client_cs_name=utf8

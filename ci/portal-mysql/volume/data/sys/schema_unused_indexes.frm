@@ -7,7 +7,7 @@ definer_user=mysql.sys
 definer_host=localhost
 suid=0
 with_check_option=0
-timestamp=2022-01-27 10:45:21
+timestamp=2022-03-30 09:29:55
 create-version=1
 source=SELECT t.object_schema, t.object_name, t.index_name FROM performance_schema.table_io_waits_summary_by_index_usage t INNER JOIN information_schema.statistics s ON t.object_schema = s.table_schema AND t.object_name = s.table_name AND t.index_name = s.index_name WHERE t.index_name IS NOT NULL AND t.count_star = 0 AND t.object_schema != \'mysql\' AND t.index_name != \'PRIMARY\' AND s.NON_UNIQUE = 1 AND s.SEQ_IN_INDEX = 1 ORDER BY object_schema, object_name
 client_cs_name=utf8
