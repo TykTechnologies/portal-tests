@@ -15,7 +15,7 @@ import * as d from'../../config_variables';
 
 describe('Prerequisits', () => {
 
-  const orgsList = [d.INVITE_ORG, d.ORG_A_NAME, d.ORG_B_NAME, d.ORG_D_NAME,];
+  const orgsList = ["testOrg", d.INVITE_ORG, d.ORG_A_NAME, d.ORG_B_NAME, d.ORG_D_NAME,];
   const teamsList = [[d.INVITE_ORG, d.INVITE_TEAM],[d.ORG_A_NAME, d.TEAM_A_NAME],
     [d.ORG_A_NAME, d.TEAM_A1_NAME], [d.ORG_B_NAME, d.TEAM_B_NAME], [d.ORG_D_NAME, d.TEAM_D_NAME]];
   let devsList = {
