@@ -9,6 +9,6 @@ services:
       POSTGRES_PASSWORD: secr3t
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
-      - ./volume/data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
