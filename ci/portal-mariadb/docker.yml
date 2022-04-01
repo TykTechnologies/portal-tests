@@ -6,8 +6,10 @@ services:
         environment:
             - MYSQL_ROOT_PASSWORD=secr3t
             - MYSQL_USER=user
+            - MYSQL_DATABASE=portal
+            - MYSQL_USER=admin
             - MYSQL_PASSWORD=secr3t
-        volumes:
-            - ./volume/data:/var/lib/mysql
+        # volumes:
+        #     - ./volume/data:/var/lib/mysql
         ports:
            - "3306:3306"
