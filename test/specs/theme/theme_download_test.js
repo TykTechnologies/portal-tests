@@ -8,7 +8,6 @@ const expectedFilePath = path.join(downloadDir, "default.zip");
 
 describe('Downloading theme', () => {
   const defaultThemeName = 'default';
-  const expectedFileSize = 863255;
 
   before(() => {
     login_page.open();
@@ -32,7 +31,8 @@ describe('Downloading theme', () => {
   it('Downloaded file should not be empty', () => {
     var stats = fs.statSync(expectedFilePath);
     var fileSizeInBytes = stats.size;
-    expect(fileSizeInBytes).to.equal(expectedFileSize);
+    //checking if file size is greater than 1000bytes
+    expect(fileSizeInBytes).to.be.above(1000, ".zip file seems to be too small");
   });
 
 });
