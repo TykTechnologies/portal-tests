@@ -1,4 +1,6 @@
 const { TimelineService } = require('wdio-timeline-reporter/timeline-service');
+const path = require('path');
+global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
     //
@@ -61,7 +63,12 @@ exports.config = {
               '--incognito',
               '--disable-web-security',
               '--allow-running-insecure-content'
-            ]
+            ],
+            prefs: {
+                'directory_upgrade': true,
+                'prompt_for_download': false,
+                'download.default_directory': downloadDir
+            }
         },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
