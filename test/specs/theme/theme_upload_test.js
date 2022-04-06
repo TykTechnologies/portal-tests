@@ -1,7 +1,6 @@
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { themes_page } from '../../../lib/pom/Themes_page';
-import { dev_catalogues_page } from '../../../lib/pom/Dev_catalogues_page';
 import { URL } from '../../../config_variables';
 const path = require('path');
 
@@ -51,8 +50,6 @@ describe('Uploading theme and making it active', () => {
     wdioExpect($('h1*=Product Catalogues Test Theme')).not.toBeDisplayed();
     wdioExpect($('h1*=Product Catalogues')).toBeDisplayed();
   });
-
-
 
   const uploadZipFile = () => {
     const filePath = path.join(__dirname, zipFileRelativePath);
