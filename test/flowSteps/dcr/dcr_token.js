@@ -17,9 +17,10 @@ module.exports = (appName) => {
       login_page.loginAsDevD();
     });
 
-    it('Developer should see approved DCR provisioning requet', () => {
+    it('Developer should see approved DCR provisioning request', () => {
       portal_page.openMyApps();
       dev_apps_page.APPS_TABLE.clickCellWithText(appName);
+      dev_apps_page.APPROVED_ACCESS_BUTTON.click();
       dev_apps_page.expectCountOfApprovedRequests(1);
       approved_request_object = dev_apps_page.getAllApprovedRequests()[0];
       approved_request_object.expectApprovedState();
