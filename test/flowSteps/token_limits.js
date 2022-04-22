@@ -16,6 +16,7 @@ module.exports = (appName) => {
     });
 
     it('Developer should see approved provisioning requet', () => {
+      browser.refresh();
       portal_page.openMyApps();
       dev_apps_page.APPS_TABLE.clickCellWithText(appName);
       dev_apps_page.expectCountOfApprovedRequests(1);

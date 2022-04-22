@@ -12,7 +12,7 @@ module.exports = (appName) => {
     
         it('Admin should be able to approve provisioning request. App: ' + appName, () => {
             console.log(">>> Approving request in app: " + appName);
-            admin_page.PROVISIONING_REQUESTS_BUTTON.click();
+            admin_page.ACCESS_REQUESTS_BUTTON.click();
             provisioning_requests_page.TABLE.clickCellWithText(appName);
             provisioning_requests_page.APPROVE_BUTTON.click();
             provisioning_requests_page.OK_BUTTON.click();
