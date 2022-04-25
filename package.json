@@ -11,7 +11,9 @@
     "headless-prerequisits": "WDIO_HEADLESS=1 npx wdio wdio.conf.js --spec test/flowSteps/prerequisits.js",
     "notify-slack": "node ./node_modules/ui_test_automation/utils/SlackNotification.js",
     "generate-coverage-doc": "PATH_TO_RESULTS=`PWD`/results/json/wdio-merged.json node ./node_modules/ui_test_automation/utils/GenerateCoverageDoc.js",
-    "test": "npx wdio wdio.conf.js"
+    "test": "npx wdio wdio.conf.js",
+    "docker-test": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js",
+    "docker-prerequisits": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js --spec test/flowSteps/prerequisits.js"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "ui_test_automation": "git+https://github.com/TykTechnologies/ui_test_automation.git#main",
     "wdio-chromedriver-service": "^7.2.0",
     "wdio-json-reporter": "^2.0.0",
+    "wdio-selenoid-standalone-service": "^1.0.0",
     "wdio-spec-reporter": "^0.1.5"
   },
   "dependencies": {
