@@ -4,7 +4,7 @@ import { themes_page } from '../../../lib/pom/Themes_page';
 
 const path = require('path');
 const fs = require('fs');
-const expectedFilePath = path.join(downloadDir, "default.zip");
+const expectedFilePath = path.join(global.downloadDir, "default.zip");
 
 describe('Downloading theme', () => {
   const defaultThemeName = 'default';
@@ -24,13 +24,19 @@ describe('Downloading theme', () => {
   });
 
   it('Theme was download as default.zip file', () => {
+    if (process.env.DOCKER_EXECUTION) {
+      return;
+    };
     waitUntilFileDownloaded();
     expect(fs.existsSync(expectedFilePath)).to.be.true;
   });
 
   it('Downloaded file should not be empty', () => {
-    var stats = fs.statSync(expectedFilePath);
-    var fileSizeInBytes = stats.size;
+    if (process.env.DOCKER_EXECUTION) {
+      return;
+    };
+    const stats = fs.statSync(expectedFilePath);
+    const fileSizeInBytes = stats.size;
     //checking if file size is greater than 1000bytes
     expect(fileSizeInBytes).to.be.above(1000, ".zip file seems to be too small");
   });
@@ -39,10 +45,12 @@ describe('Downloading theme', () => {
 
 const waitUntilFileDownloaded = () => {
   let checkCount = 1;
-  while(checkCount < 20, checkCount++) {
+  while(checkCount < 20) {
     if (fs.existsSync(expectedFilePath)) {
       return;
     }
+    console.log(`>>> Waiting until file is saved on drive, attempt: ${checkCount}`);
     browser.pause(2000);
+    checkCount++;
   }
 };

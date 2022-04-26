@@ -16,6 +16,7 @@ module.exports = (appName) => {
     });
 
     it('Developer should see approved provisioning requet', () => {
+      browser.refresh();
       portal_page.openMyApps();
       dev_apps_page.APPS_TABLE.clickCellWithText(appName);
       dev_apps_page.expectCountOfApprovedRequests(1);
@@ -37,6 +38,7 @@ module.exports = (appName) => {
     });
 
     it('Developer is able to rotate token', () => {
+      browser.refresh();
       approved_request_object.ROTATE_BUTTON.click();
       dev_apps_page.POPUP_ROTATE_BUTTON.click();
       rotatedToken = approved_request_object.getToken();
