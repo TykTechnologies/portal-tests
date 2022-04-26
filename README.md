@@ -7,31 +7,35 @@ test coverage can be found [here](coverage.md)
 If you just need a working instance of Portal connected with Tyk and Keycloak - start docker-compose (point 2 below) and make your Portal to use database saved in ci/portal.db file.
 Portal should now be connected to Tyk Dahsboard and be have DCR details set up.
 ## How to run tests
-Tests can be executed inside docker containers - no need to install any dependecies.
+Tests can be executed inside docker wdio service.
 1. Clone this repository
-2. Generate and export license (for Portal and dashboard) to env variables
+2. Install framework dependencies
+```
+npm install
+```
+3. Generate and export license (for Portal and dashboard) to env variables
 ```
 export PORTAL_LICENSEKEY=%license%
 export TYK_DB_LICENSEKEY=%license%
 ```
-3. Start docker-compose with Tyk stack (gateway, dashboard, redis, mongo) using single command
+4. Start docker-compose with Tyk stack (gateway, dashboard, redis, mongo) using single command
 ```
 docker-compose -f ci/tyk_dashboard.yml up
 ```
-4. Start your Portal instance with empty database and admin user
+5. Start your Portal instance with empty database and admin user
 ```
 ./dev-portal  --bootstrap -user=auto_test@tyk.io -pass=test123
 ``` 
-5. Execute prerequisits
+6. Execute prerequisits
 ```
 npm run docker-prerequisits
 ```
 After this you will have Portal filled with data needed for manual testing (provider, users, catalogues, etc.). 
-6.  Execute tests
+7.  Execute tests
 ```
 npm run docker-test
 ```
-7. Report will be generated in __results/report/index.html__
+8. Report will be generated in __results/report/index.html__
 
 Tests will also work with Portal started as docker container. Just please make sure that admin user was created.
 If portal
