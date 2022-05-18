@@ -5,7 +5,7 @@ else
     RESULT="FAILED"
 fi
 echo "Checking branch: $BRANCH"
-if [ "$BRANCH" == "refs/heads/master" ]; then
+if [[ "$BRANCH" == "refs/heads/master" || "$BRANCH" == "refs/heads/main" ]]; then
     EXECUTION=QA-895
 fi
 
