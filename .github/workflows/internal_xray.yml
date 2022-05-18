@@ -147,4 +147,4 @@ jobs:
         STATUS: "${{ steps.test_execution.outcome }}"
         CLIENT_ID: ${{secrets.XRAY_CLIENT_ID}}
         CLIENT_SECRET: ${{secrets.XRAY_CLIENT_SECRET}}
-        $BRANCH: ${{ github.ref }}
+        BRANCH: ${{ github.ref }}
