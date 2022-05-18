@@ -1,12 +1,9 @@
-echo "Sending update for Xray"
-TEST=$1
-CLIENT_ID=$2
-CLIENT_SECRET=$3
+echo "Sending update of test execution to Xray"
 EXECUTION=QA-895
-if [ "$4" == "success" ]; then
-    STATUS="PASSED"
+if [ "$STATUS" == "success" ]; then
+    RESULT="PASSED"
 else
-    STATUS="FAILED"
+    RESULT="FAILED"
 fi
 # if [ "${ github.ref }" == "success" ]; then
 #     STATUS="PASSED"
@@ -19,7 +16,7 @@ echo "CLI:"
 echo "$5"
 echo "Requesting Token"
 TOKEN=$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.getxray.app/api/v2/authenticate| tr -d '"')
-echo "Sending update $STATUS on $TEST and execution $EXECUTION"
+echo "Sending update $RESULT on $TEST and execution $EXECUTION"
 curl -H "Authorization: Bearer $TOKEN" -X POST https://xray.cloud.getxray.app/api/v2/import/execution \
-    -d '{"testExecutionKey":"'$EXECUTION'","tests":[{"testKey":"'$TEST'","status":"'$STATUS'"}]}' \
+    -d '{"testExecutionKey":"'$EXECUTION'","tests":[{"testKey":"'$TEST'","status":"'$RESULT'"}]}' \
     -H 'Content-Type: application/json'
