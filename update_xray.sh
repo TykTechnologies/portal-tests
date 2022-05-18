@@ -5,11 +5,12 @@ if [ "$STATUS" == "success" ]; then
 else
     RESULT="FAILED"
 fi
-# if [ "${ github.ref }" == "success" ]; then
-#     STATUS="PASSED"
-# else
-#     STATUS="FAILED"
-# fi
+if [ "$BRANCH" == "success" ]; then
+    STATUS="PASSED"
+else
+    STATUS="FAILED"
+fi
+
 echo "Branch variable:"
 echo "$BRANCH"
 echo "CLI:"
