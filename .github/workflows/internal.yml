@@ -1,13 +1,9 @@
 name: UI Internal Portal Tests
 
 on:
-  pull_request:
   push:
     branches:
       - main
-      - test/*
-      - CI_*
-      - release-*
 
 jobs:
   test:

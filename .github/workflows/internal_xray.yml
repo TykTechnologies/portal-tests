@@ -138,7 +138,7 @@ jobs:
     #     STATUS: "${{ steps.test_execution.outcome == 'success' && ':white_check_mark:' || ':no_entry_sign:' }}"
 
     - name: Xray update
-      if: github.event_name == 'push'
+      # if: github.event_name == 'push'
       run: |
         ls
         ./update_xray.sh QA-892 $CLIENT_ID $CLIENT_SECRET $STATUS
