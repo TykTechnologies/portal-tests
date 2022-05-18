@@ -5,7 +5,7 @@ else
     RESULT="FAILED"
 fi
 echo "Checking branch: $BRANCH"
-if [ "$BRANCH" == "xray" ]; then
+if [ "$BRANCH" == "refs/heads/xray" ]; then
     EXECUTION=QA-895
 fi
 
