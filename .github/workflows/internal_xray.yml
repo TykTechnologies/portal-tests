@@ -141,9 +141,10 @@ jobs:
       # if: github.event_name == 'push'
       run: |
         ls
-        ./update_xray.sh QA-892 $CLIENT_ID $CLIENT_SECRET $STATUS
+        ./update_xray.sh QA-892 $CLIENT_ID $CLIENT_SECRET $STATUS $BRANCH
       working-directory: portal-tests
       env:
         STATUS: "${{ steps.test_execution.outcome }}"
         CLIENT_ID: ${{secrets.XRAY_CLIENT_ID}}
         CLIENT_SECRET: ${{secrets.XRAY_CLIENT_SECRET}}
+        $BRANCH: ${{ github.ref }}

@@ -13,8 +13,10 @@ fi
 # else
 #     STATUS="FAILED"
 # fi
-echo "Branch:"
-echo "${{ github.ref }}"
+echo "Branch variable:"
+echo "$BRANCH"
+echo "CLI:"
+echo "$5"
 echo "Requesting Token"
 TOKEN=$(curl -H "Content-Type: application/json" -X POST --data "{ \"client_id\": \"$CLIENT_ID\",\"client_secret\": \"$CLIENT_SECRET\" }" https://xray.cloud.getxray.app/api/v2/authenticate| tr -d '"')
 echo "Sending update $STATUS on $TEST and execution $EXECUTION"
