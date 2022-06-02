@@ -1,5 +1,16 @@
 version: '3.3'
 services:
+    portal:
+        image: tykio/portal:${PORTAL_IMAGE_VERSION}
+        ports:
+            - "3001:3001"
+        environment:
+            - "PORTAL_LICENSEKEY=${TYK_DB_LICENSEKEY}"
+            - ADMIN_EMAIL=auto_test@tyk.io
+            - ADMIN_PASSWORD=test123
+            # - PORTAL_DATABASE_DIALECT="postgres"
+            # - PORTAL_DATABASE_CONNECTIONSTRING="host=localhost port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
+        command: --bootstrap
     tyk-dashboard:
         container_name: tyk-dashboard-local
         image: tykio/tyk-dashboard:v3.2.1
@@ -17,7 +28,7 @@ services:
         container_name: tyk-gateway-local
         image: tykio/tyk-gateway:v3.2.1
         ports:
-            - "8080:8080" 
+            - "8081:8081" 
         volumes:
             - ./tyk.conf:/opt/tyk-gateway/tyk.conf
         environment:
@@ -42,3 +53,34 @@ services:
         ports:
            - "8025:8025"
            - "1025:1025"
+    keycloak-postgres:
+        image: postgres:10-alpine
+        restart: on-failure:5
+        environment:
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_DB=keycloak
+            - POSTGRES_USER=keycloak
+            - PGDATA=/var/lib/postgresql/data/pgdata
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./keycloak-db/data:/var/lib/postgresql/data
+    keycloak: 
+        image: jboss/keycloak:16.1.0
+        container_name: keycloak
+        environment:
+            # - KEYCLOAK_USER=admin
+            # - KEYCLOAK_PASSWORD=admin
+            - DB_USER=keycloak
+            - DB_PASSWORD=password
+            - DB_ADDR=keycloak-postgres
+            - DB_VENDOR=postgres
+            - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
+        ports:
+            - "8080:8080"
+        # volumes:
+        #     - ./keycloak/:/opt/jboss/keycloak/standalone/data/
+        networks:
+            - default
+        depends_on:
+            - keycloak-postgres

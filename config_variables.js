@@ -1,18 +1,19 @@
 require('dotenv').config();
 
 const DOCKER_EXECUTION = process.env.DOCKER_EXECUTION || false;
-let URL, TYK_GW_URL, KEYCLOAK_URL; 
+let URL, TYK_GW_URL, KEYCLOAK_URL, TYK_PRO_URL; 
 if (DOCKER_EXECUTION) {
     URL = "http://host.docker.internal:3001/";
     TYK_GW_URL = "http://tyk-gateway:8081/";
     KEYCLOAK_URL = "http://keycloak:8080/";
+    TYK_PRO_URL = "http://tyk-dashboard:3000";
 
 } else {
     URL = process.env.URL || "http://localhost:3001/";
     TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8081/";
     KEYCLOAK_URL = "http://localhost:8080/";
+    TYK_PRO_URL = "http://localhost:3000/";
 }
-const TYK_PRO_URL = process.env.TYK_PRO_URL || "http://localhost:3000/";
 
 module.exports = {
     URL: URL,
