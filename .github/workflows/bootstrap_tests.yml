@@ -73,7 +73,7 @@ jobs:
       env:
         TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
       run: |
-        docker-compose -f ci/full_env.yml up -d
+        docker-compose -f ci/bootstrap_env.yml up -d
       working-directory: portal-tests
 
     - name: Install test dependecies
