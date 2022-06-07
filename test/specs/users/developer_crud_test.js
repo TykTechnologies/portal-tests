@@ -2,7 +2,7 @@ import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { api_consumers_page } from '../../../lib/pom/Api_consumers_page';
 
-describe('Creating new API consumer', () => {
+describe('Creating new developer', () => {
     const userDetails = {
         first: "test_first_name",
         update_first: "update_first",
@@ -20,6 +20,7 @@ describe('Creating new API consumer', () => {
         admin_page.API_CONSUMERS_BUTTON.click();
         api_consumers_page.ADD_BUTTON.click();
         api_consumers_page.fillNewUserForm(userDetails);
+        browser.pause(2000);
         api_consumers_page.SAVE_BUTTON.click();
     });
 
@@ -34,7 +35,7 @@ describe('Creating new API consumer', () => {
         wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).toBeDisplayed();
     });
 
-    it('Admin is able to delete the new api consumer', () => {
+    it('Admin is able to delete the new developer', () => {
         const rowNumber = api_consumers_page.TABLE.getRowNumberOfCellWithValue(`${userDetails.update_first} ${userDetails.last}`);
         api_consumers_page.TABLE.deleteRow(rowNumber);
         wdioExpect($(`div=${userDetails.update_first} ${userDetails.last}`)).not.toBeDisplayed();
