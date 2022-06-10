@@ -216,7 +216,7 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
 
   it("Set DCR settings", () => {
     admin_page.APP_REGISTRATION_BUTTON.click();
-    app_registration_page.PROVIDER_TYPE_DROPDOWN.selectOption("keycloak");
+    app_registration_page.PROVIDER_TYPE_DROPDOWN.selectOption("Keycloak");
     app_registration_page.WELL_KNOWN_URL_INPUT.setValue(d.KEYCLOAK_WELL_KNOWN_URL);
     app_registration_page.ACCESS_TOKEN_INPUT.setValue(d.KEYCLOAK_TOKEN);
     if (app_registration_page.SSL_SKIP_VERIFY_CHECKBOX.getAttribute("checked") !== "true") {
