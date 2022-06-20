@@ -1,0 +1,12 @@
+.modal-content {
+  border-radius: var(--tdp-border-radius);
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+.modal-title {
+  font-family: 'Smoolthan-Semibold';
+}

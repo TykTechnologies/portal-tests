@@ -1,0 +1,122 @@
+footer {
+  background: var(--tdp-nav-bg-color);
+  color: var(--tdp-nav-link-color);
+}
+
+footer .footer-menu__link {
+  color: var(--tdp-nav-link-color);
+}
+
+.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+  background: var(--tdp-nav-bg-color) !important;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: var(--tdp-nav-link-color);
+  font-family: 'OpenSans-Semibold';
+}
+
+.navbar-dark .navbar-nav .nav-link:focus,
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: var(--tdp-link-color);
+}
+
+.navbar {
+  padding: 10px 16px;
+}
+
+.navbar-nav {
+  flex: 0 0 100%;
+}
+
+.navbar-menu-items .nav-item {
+  position: relative;
+}
+
+.navbar-menu-items > .nav-item::after {
+  background-color: var(--tdp-primary);
+  content: "";
+  width: 0;
+  height: 2px;
+  left: 0;
+  bottom: 0;
+  transition: width 0.35s ease 0s;
+  position: absolute;
+}
+
+.navbar-menu-items .nav-item:hover::after {
+  width: 100%;
+}
+
+.navbar .nav-link,
+.navbar .navbar-brand {
+  color: var(--tdp-nav-link-color);
+  text-transform: uppercase;
+}
+
+.navbar .nav-link {
+  font-size: 14px;
+}
+
+.navbar .navbar-brand {
+  font-size: 20px;
+  margin-right: 40px;
+  font-family: 'OpenSans-Bold';
+}
+
+.btn-login {
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.navbar-menu-items {
+  flex-grow: 2;
+}
+
+.badge {
+  border-radius: 9px;
+}
+
+.cart__item-count {
+  font-size: 9px;
+  background: var(--tdp-danger-dark);
+  color: white;
+  padding: 1px 3px;
+  vertical-align: top;
+  margin-left: -11px;
+  margin-top: 7px;
+}
+
+/* Submenu */
+.submenu {
+  background: var(--tdp-secondary-dark);
+  padding: 0;
+  margin: 0;
+}
+
+.submenu .dropdown-item {
+  padding: 15px;
+}
+
+.navbar-nav li:hover > ul.dropdown-menu {
+  display: block;
+}
+
+.submenu {
+  top: 30px;
+}
+
+.submenu .dropdown-item {
+  color: white;
+}
+
+.dropdown-item:focus,
+.dropdown-item:hover {
+  background-color: var(--tdp-extra-dark);
+  color: var(--tdp-primary);
+}
+
+.admin-dash {
+  text-decoration: underline;
+  font-family: 'OpenSans-SemiBold';
+}

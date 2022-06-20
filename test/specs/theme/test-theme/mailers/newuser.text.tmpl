@@ -1,0 +1,9 @@
+There is a new user request pending please approve it from the admin console
+Id: {{ .user.ID }}
+User: {{ .user.DisplayName }} ({{ .user.Email }})
+Role: {{ .user.Role }}
+Organisation: {{ .user.Organisation.Name }}
+Teams:
+{{ range .user.Teams }}
+* {{.Name}}</li>
+{{ end }}

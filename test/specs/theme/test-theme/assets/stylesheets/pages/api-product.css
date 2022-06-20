@@ -1,0 +1,141 @@
+.api-product-page-wrapper {
+  padding-top: 56px;
+}
+
+.api-product-page-wrapper a:not(.btn) {
+  color: var(--tdp-text-color);
+  font-family: 'OpenSans-Semibold';
+}
+
+.api-product-page__info-description a {
+  text-decoration: underline;
+}
+
+.api-product-page-wrapper .alert.alert-success a:not(.btn) {
+  color: var(--tdp-alert-success-text-color);
+  text-decoration: underline;
+}
+
+.api-product-page-wrapper .card,
+.api-product-page-wrapper .card img {
+  border: none;
+  border-radius: 0;
+}
+
+.api-product-page-wrapper .card {
+  padding: 0 20px 0 0;
+}
+
+.api-product-page-wrapper .card a.docs-link {
+  font-size: initial;
+  color: var(--tdp-link-color);
+}
+
+.api-product-page-wrapper .card a.docs-link i {
+  font-size: 11px;
+}
+
+.api-product-page-wrapper .card img {
+  width: 250px !important;
+}
+
+.api-product-page__header .card .card-body {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.api-product-page__header .card.has-logo .card-body {
+  padding: 20px;
+}
+
+.api-product-page__header .card .pill-container {
+  margin-left: 0;
+}
+
+.api-product-page__info {
+  border-top: 1px solid var(--tdp-table-border-color);
+  padding-block: 20px;
+}
+
+.api-product-page__info-title {
+  margin-bottom: 15px;
+}
+
+.api-product-page__info-description {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.api-product-page__info-description__catalogue-info {
+  flex: 50%;
+}
+
+.api-product-page__info-description__base-url {
+  padding: 20px;
+  background: var(--tdp-light-gray);
+  border-radius: var(--tdp-border-radius);
+}
+
+.table-plans-limits {
+  margin-bottom: 0;
+}
+
+.table-plans-limits:first-child {
+  margin-bottom: 1rem;
+}
+
+.card.has-logo .card-body .card-title {
+  padding-bottom: 35px;
+}
+
+.view-docs-dropdown .docs-link {
+  border-bottom: 1px solid var(--tdp-primary-light);
+  margin: 0;
+  padding: 10px 10px 10px 20px;
+}
+.view-docs-dropdown a,
+.view-docs-dropdown a:hover {
+  color: var(--tdp-text-color);
+}
+
+
+.view-docs-dropdown .docs-link:last-child {
+  border-bottom: 0;
+}
+
+.labeled-card {
+  height: 166px;
+  background-color: var(--tdp-light-gray);
+  border: var(--tdp-light-border);
+  border-radius: 20px;
+}
+
+.cart-wrapper .labeled-card {
+  height: auto;
+  flex: 0 1 48%;
+}
+
+.labeled-card__docs-link a,
+.api-product-page-wrapper .labeled-card__docs-link a,
+.api-product-page-wrapper .labeled-card__docs-link .tykon-link {
+  color: var(--tdp-link-color);
+}
+
+.labeled-card__title h3 {
+  font-family: 'OpenSans-Regular';
+}
+
+.labeled-card__title {
+  background-color: var(--tdp-primary-dark);
+  padding-inline: 15px;
+  padding-block: 3px;
+  color: white;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  text-align: center;
+  align-self: center;
+  font-size: var(--size-md);
+  text-transform: uppercase;
+}

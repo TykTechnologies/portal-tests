@@ -1,0 +1,36 @@
+<!-- Main layout used to render all content pages -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>{{ if .page}} {{.page.Title}} {{else}} Developer Portal {{end}}</title>
+
+    <!-- Load style assets -->
+    <link href="/system/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <link href="/assets/stylesheets/fonts.css{{.previewId}}" rel="stylesheet">
+    <link href="/assets/stylesheets/main.css{{.previewId}}" rel="stylesheet">
+
+</head>
+
+  <body>
+      <!-- Render top navigation menu -->
+      {{ render "top_nav" . }}
+
+      <!-- Render main page content -->
+      <div class="page-wrapper">
+        {{ yield }}
+      </div>
+      <!-- Render footer menu -->
+      {{ render "footer" . }}
+
+  </body>
+
+</html>

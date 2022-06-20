@@ -1,0 +1,17 @@
+<div class="docs-container">
+  <div class="card mt-4">
+    <div class="card-body">
+      <h3 class="card-title"><a href="/catalogue-products/{{.product.Path}}">{{.product.Name}}</a></h3>
+      <p class="card-text">
+        {{.product.Description}}
+      </p>
+    </div>
+  </div>
+  <div>
+    <elements-api 
+        apiDescriptionUrl='{{.Url}}'
+        router="hash"
+        layout="sidebar"
+    />
+  </div>
+</div>
