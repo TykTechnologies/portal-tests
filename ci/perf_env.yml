@@ -1,0 +1,87 @@
+version: '3.3'
+services:
+    portal:
+        image: tykio/portal:${PORTAL_IMAGE_VERSION}
+        ports:
+            - "3001:3001"
+        environment:
+            - "PORTAL_LICENSEKEY=${TYK_DB_LICENSEKEY}"
+            - ADMIN_EMAIL=auto_test@tyk.io
+            - ADMIN_PASSWORD=test123
+            - PORTAL_DATABASE_DIALECT=${PORTAL_DATABASE_DIALECT}
+            - PORTAL_DATABASE_CONNECTIONSTRING=${PORTAL_DATABASE_CONNECTIONSTRING}
+        command: --bootstrap
+    tyk-dashboard:
+        container_name: tyk-dashboard-local
+        image: tykio/tyk-dashboard:v3.2.1
+        ports:
+            - "3000:3000"
+        environment:
+            - TYK_LOGLEVEL=info
+            - "TYK_DB_LICENSEKEY=${TYK_DB_LICENSEKEY}"
+        volumes:
+            - ./tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+        depends_on:
+            - tyk-redis
+            - tyk-mongo
+    tyk-gateway:
+        container_name: tyk-gateway-local
+        image: tykio/tyk-gateway:v3.2.1
+        ports:
+            - "8081:8081" 
+        volumes:
+            - ./tyk.conf:/opt/tyk-gateway/tyk.conf
+        environment:
+            - TYK_LOGLEVEL=info
+        depends_on:
+            - tyk-redis
+    tyk-redis:
+        image: redis:6
+        volumes:
+            - ./redis-volume/data:/data
+        ports:
+            - "6379:6379"
+    tyk-mongo:
+        image: mongo:4.1
+        volumes:
+            - ./mongo-volume/data:/data/db
+        ports:
+           - "27017:27017"
+    prometheus:
+        image: prom/prometheus:latest
+        volumes:
+            - ./prometheus.yml:/etc/prometheus/prometheus.yml
+        command: 
+            - '--config.file=/etc/prometheus/prometheus.yml'
+        ports:
+            - 9090:9090
+    node-exporter:
+        image: prom/node-exporter
+        ports:
+            - 9100:9100
+    cadvisor:
+        image: gcr.io/cadvisor/cadvisor
+        ports:
+            - 8080:8080
+        volumes:
+            - /var/run:/var/run:rw
+            - /:/rootfs:ro
+            - /sys:/sys:ro
+            - /var/lib/docker/:/var/lib/docker:ro
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+            - /etc/machine-id:/etc/machine-id:ro
+            - /var/lib/dbus/machine-id:/var/lib/dbus/machine-id:ro
+        devices:
+            - /dev/kmsg:/dev/kmsg
+        environment:
+            - privileged=true
+            - GRUB_CMDLINE_LINUX_DEFAULT="cgroup_enable=memory swapaccount=1"
+    grafana:
+        image: grafana/grafana
+        user: "1000"
+        environment:
+            - GF_SECURITY_ADMIN_PASSWORD=password
+        depends_on:
+            - prometheus
+        ports:
+            - 4000:3000
