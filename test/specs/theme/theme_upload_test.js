@@ -40,7 +40,7 @@ describe('Uploading theme and making it active', () => {
 
   it('Changes in current theme are visible in UI', () => {
     browser.url(cataloguesURLPath);
-    wdioExpect($('h1*=Product Catalogues Test Theme')).toBeDisplayed(); //"Test Theme" was added in theme
+    wdioExpect($('h1*=Product Catalogues TEST THEME v1.0.1')).toBeDisplayed(); //"Test Theme" was added in theme
   });
 
   it('Admin is able to change change theme back to default', () => {

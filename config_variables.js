@@ -3,7 +3,8 @@ require('dotenv').config();
 const DOCKER_EXECUTION = process.env.DOCKER_EXECUTION || false;
 let URL, TYK_GW_URL, KEYCLOAK_URL, TYK_PRO_URL, KEYCLOAK_WELL_KNOWN_URL; 
 if (DOCKER_EXECUTION) {
-    URL = "http://host.docker.internal:3001/";
+    // URL = "http://host.docker.internal:3001/";
+    URL = "http://localhost:3001/";
     TYK_GW_URL = "http://tyk-gateway:8081/";
     KEYCLOAK_URL = "http://keycloak:8080/";
     KEYCLOAK_WELL_KNOWN_URL = "http://keycloak:8080/auth/realms/master/.well-known/openid-configuration";
