@@ -6,7 +6,7 @@ const path = require('path');
 
 describe('Uploading theme and making it active', () => {
   const zipFileRelativePath = "./test-theme.zip";
-  const themeName = 'test_theme';
+  const themeName = 'test-theme';
   const defaultThemeName = 'default';
   const cataloguesURLPath = URL + "portal/catalogue-products";
   
