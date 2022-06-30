@@ -1,11 +1,11 @@
-name: UI tests on docker image
+name: UI tests on docker image - postgres
 
 on:
   workflow_dispatch:
     inputs:
       image_version:
-        default: "v0.0.1-rc13"
-        description: "Docker image version, like: v0.0.1-rc13"
+        default: "v1.0.0-rc1"
+        description: "Docker image version, like: v1.0.1-rc13"
         required: true
 
 jobs:
