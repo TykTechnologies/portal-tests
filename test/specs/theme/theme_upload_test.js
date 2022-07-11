@@ -46,6 +46,7 @@ describe('Uploading theme and making it active', () => {
   it('Admin is able to change change theme back to default', () => {
     browser.back();
     themes_page.activateTheme(defaultThemeName);
+    browser.pause(2000);
     browser.url(cataloguesURLPath);
     wdioExpect($('h1*=Product Catalogues Test Theme')).not.toBeDisplayed();
     wdioExpect($('h1*=Product Catalogues')).toBeDisplayed();
