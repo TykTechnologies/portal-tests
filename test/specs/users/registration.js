@@ -21,6 +21,9 @@ describe('Registation without invite code', () => {
     main_page.REGISTER_BUTTON.click();
     registration_page.fillForm(registrationDetails);
     registration_page.REGISTER_BUTTON.click();
+    if (!main_page.REGISTRATION_SUCCESS_LABEL.isDisplayed()) {
+      registration_page.REGISTER_BUTTON.click();
+    }
     wdioExpect(main_page.REGISTRATION_SUCCESS_LABEL).toBeDisplayed();
    });
 
