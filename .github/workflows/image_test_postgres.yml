@@ -40,7 +40,7 @@ jobs:
         TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
         PORTAL_IMAGE_VERSION: ${{github.event.inputs.image_version}}
         PORTAL_DATABASE_DIALECT: "postgres"
-        PORTAL_DATABASE_CONNECTIONSTRING: "host=portal-postgres port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
+        PORTAL_DATABASE_CONNECTIONSTRING: "host=portal-postgres port=5432 user=admin dbname=portal password=secr3t sslmode=disable"
       run: |
         docker-compose -p portal -f ci/full_env.yml up -d
       working-directory: portal-tests
