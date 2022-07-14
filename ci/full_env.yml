@@ -10,7 +10,7 @@ services:
             - ADMIN_EMAIL=auto_test@tyk.io
             - ADMIN_PASSWORD=test123
             - PORTAL_DATABASE_DIALECT=${PORTAL_DATABASE_DIALECT}
-            - "PORTAL_DATABASE_CONNECTIONSTRING=host=host.docker.internal port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
+            - "PORTAL_DATABASE_CONNECTIONSTRING=${PORTAL_DATABASE_CONNECTIONSTRING}"
             # - "PORTAL_DATABASE_CONNECTIONSTRING=admin:secr3t@(host.docker.internal:3306)/portal?charset=utf8&parseTime=True&loc=Local"
             # - "PORTAL_DATABASE_CONNECTIONSTRING=admin:secr3t@(host.docker.internal:3306)/portal?charset=utf8&parseTime=True&loc=Local"
             - PORTAL_API_SECRET=12345
