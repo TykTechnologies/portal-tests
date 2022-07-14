@@ -1,4 +1,4 @@
-name: UI tests Postgres on docker image
+name: UI tests MySQL on docker image
 
 on:
   workflow_dispatch:
@@ -30,17 +30,17 @@ jobs:
         token: ${{ secrets.ORG_GH_TOKEN }}
         submodules: true
 
-    - name: Start postgres container
+    - name: Start mysql container
       run: |
-        docker-compose -p portal -f ci/portal-postgres/postgres.yml up -d
+        docker-compose -p portal -f ci/portal-mysql/mysql.yml up -d
       working-directory: portal-tests
   
     - name: Starting containers
       env:
         TYK_DB_LICENSEKEY: ${{secrets.DASH_LICENSE}}
         PORTAL_IMAGE_VERSION: ${{github.event.inputs.image_version}}
-        PORTAL_DATABASE_DIALECT: "postgres"
-        PORTAL_DATABASE_CONNECTIONSTRING: "host=portal-postgres port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
+        PORTAL_DATABASE_DIALECT: "mysql"
+        PORTAL_DATABASE_CONNECTIONSTRING: "admin:secr3t@(mysql:3306)/portal?charset=utf8&parseTime=True&loc=Local"
       run: |
         docker-compose -p portal -f ci/full_env.yml up -d
       working-directory: portal-tests
@@ -83,23 +83,8 @@ jobs:
       working-directory: portal-tests
       env:
         SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-        WDIO_TEST_ENV: ${{ github.ref }} (commit used -> ${{ github.event.head_commit.message }})
+        WDIO_TEST_ENV: Portal image ${{github.event.inputs.image_version}} with MySql
         FRAMEWORK_REPO: ${{ github.repository }}
         EVENT_TRIGGER: ${{ github.event_name }} (${{ github.actor }})
         JOB_RUN_ID: ${{ github.run_id }}
         JOB_NAME: ${{ github.job }}
-
-    - name: Comment on PR
-      if: ${{ always() }} && github.event.issue.pull_request
-      uses: mshick/add-pr-comment@v1
-      with:
-        message: |
-          **UI tests result: ${{ steps.test_execution.outcome }}** ${{ env.STATUS }} 
-          Branch used: ${{ github.ref }}
-          Commit: ${{ github.event.after }} ${{ github.event.commits[0].message }}
-          Triggered by: ${{ github.event_name }} (@${{ github.actor }})
-          [Execution page](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})
-        repo-token: ${{ secrets.ORG_GH_TOKEN }}
-        allow-repeats: true
-      env:
-        STATUS: "${{ steps.test_execution.outcome == 'success' && ':white_check_mark:' || ':no_entry_sign:' }}"
