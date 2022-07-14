@@ -1,6 +1,7 @@
 version: '3.3'
 services:
     portal:
+        container_name: portal
         image: tykio/portal:${PORTAL_IMAGE_VERSION}
         ports:
             - "3001:3001"
