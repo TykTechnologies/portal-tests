@@ -9,11 +9,16 @@ services:
             - ADMIN_EMAIL=auto_test@tyk.io
             - ADMIN_PASSWORD=test123
             - PORTAL_DATABASE_DIALECT=${PORTAL_DATABASE_DIALECT}
-            - PORTAL_DATABASE_CONNECTIONSTRING=${PORTAL_DATABASE_CONNECTIONSTRING}
+            - "PORTAL_DATABASE_CONNECTIONSTRING=host=host.docker.internal port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
+            # - "PORTAL_DATABASE_CONNECTIONSTRING=admin:secr3t@(host.docker.internal:3306)/portal?charset=utf8&parseTime=True&loc=Local"
+            # - "PORTAL_DATABASE_CONNECTIONSTRING=admin:secr3t@(host.docker.internal:3306)/portal?charset=utf8&parseTime=True&loc=Local"
+            - PORTAL_API_SECRET=12345
+            - PORTAL_REFRESHINTERVAL=10
+            # - PORTAL_DATABASE_CONNECTIONSTRING=${PORTAL_DATABASE_CONNECTIONSTRING}
         command: --bootstrap
     tyk-dashboard:
         container_name: tyk-dashboard-local
-        image: tykio/tyk-dashboard:v3.2.1
+        image: tykio/tyk-dashboard:v4.0
         ports:
             - "3000:3000"
         environment:
@@ -26,7 +31,7 @@ services:
             - tyk-mongo
     tyk-gateway:
         container_name: tyk-gateway-local
-        image: tykio/tyk-gateway:v3.2.1
+        image: tykio/tyk-gateway:v4.0
         ports:
             - "8081:8081" 
         volumes:
@@ -84,6 +89,3 @@ services:
             - default
         depends_on:
             - keycloak-postgres
-networks:
-  default:
-    name: portal

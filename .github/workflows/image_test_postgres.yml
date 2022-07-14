@@ -32,7 +32,7 @@ jobs:
 
     - name: Start postgres container
       run: |
-        docker-compose -f ci/portal-postgres/postgres.yml up -d
+        docker-compose -p portal -f ci/portal-postgres/postgres.yml up -d
       working-directory: portal-tests
   
     - name: Starting containers
@@ -42,7 +42,7 @@ jobs:
         PORTAL_DATABASE_DIALECT: "postgres"
         PORTAL_DATABASE_CONNECTIONSTRING: "host=localhost port=5433 user=admin dbname=portal password=secr3t sslmode=disable"
       run: |
-        docker-compose -f ci/full_env.yml up -d
+        docker-compose -p portal -f ci/full_env.yml up -d
       working-directory: portal-tests
 
 

@@ -12,7 +12,4 @@ services:
       - "5433:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-networks:
-  default:
-    name: portal
-    external: true
+      
