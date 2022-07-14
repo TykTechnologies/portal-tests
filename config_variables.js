@@ -12,7 +12,7 @@ if (DOCKER_EXECUTION) {
 
 } else {
     URL = process.env.URL || "http://localhost:3001/";
-    TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8081/";
+    // TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8081/";
     KEYCLOAK_URL = "http://localhost:8080/";
     KEYCLOAK_WELL_KNOWN_URL = "http://localhost:8080/auth/realms/master/.well-known/openid-configuration";
     TYK_PRO_URL = "http://localhost:3000/";
@@ -20,7 +20,7 @@ if (DOCKER_EXECUTION) {
 
 module.exports = {
     URL: URL,
-    TYK_GW_URL: TYK_GW_URL,
+    TYK_GW_URL: process.env.TYK_GW_URL || "http://localhost:8081/",
     TYK_PRO_URL: TYK_PRO_URL,
     LOGIN_PATH: "auth/login",
     DASHBOARD_API: TYK_PRO_URL + 'api/',
