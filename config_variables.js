@@ -22,7 +22,7 @@ module.exports = {
     URL: URL,
     TYK_GW_URL: process.env.TYK_GW_URL || "http://localhost:8081/",
     TYK_PRO_URL: TYK_PRO_URL,
-    LOGIN_PATH: "auth/login",
+    LOGIN_PATH: "auth/password/login",
     DASHBOARD_API: TYK_PRO_URL + 'api/',
     DASHBOARD_ADMIN_API: TYK_PRO_URL + 'admin/',
     USERS_PATH: "users/",
