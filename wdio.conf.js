@@ -3,6 +3,10 @@ const path = require('path');
 global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
+    hostname: 'selenoid', // tests running inside the container should connect to the same network
+    port: 4444,
+    path: "/wd/hub",
+    maxInstances: process.env.SELENOID === 'true' ? 1 : 2,
     //
     // ====================
     // Runner Configuration
@@ -63,13 +67,26 @@ exports.config = {
               '--incognito',
               '--disable-web-security',
               '--allow-running-insecure-content'
-            ],
+            ].concat(
+                process.env.SELENOID === 'true' ? [
+                    // When debugging with Selenoid support headless mode is not enabled
+                    // to allow viewing actions in the browser.
+                ] : [
+                    '--headless',
+                    '--disable-gpu',
+                ],
+            ),
             prefs: {
                 'directory_upgrade': true,
                 'prompt_for_download': false,
                 'download.default_directory': downloadDir
-            }
+            },
         },
+        // 'selenoid:options': {
+        //     enableLog: true,
+        //     enableVNC: true,
+        //     enableVideo: true
+        // },
         acceptInsecureCerts: true
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
@@ -124,8 +141,9 @@ exports.config = {
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
     services: [
-        ['chromedriver'],
-        [TimelineService]
+        // ['chromedriver'],
+        [TimelineService],
+        // ['selenoid-standalone', { pathToBrowsersConfig: './browsers.json' }]
     ],
     
     // Framework you want to run your specs with.

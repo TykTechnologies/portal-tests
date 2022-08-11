@@ -1,0 +1,37 @@
+
+# This file will serve the base configurations for CI and local envrionments
+version: "3.4"
+services:
+  # selenoid:
+  #   image: "aerokube/selenoid:latest"
+  #   container_name: selenoid
+  #   ports:
+  #     - "4444:4444"
+  #   networks:
+  #     - selenoid
+  #   environment:
+  #     - TZ=Asia/Kolkata
+  #   volumes:
+  #     - "./browsers.json:/etc/selenoid/browsers.json"
+
+# this is the custom build app which contains our automation test scripts
+  e2e:
+    image: e2e-test
+    build: . # it takes the path of the dockerfile and builds it
+    # depends_on:
+    #   - selenoid
+    # links:
+    #   - selenoid
+    networks:
+      - selenoid
+    volumes:
+      - "./allure-results:/usr/lib/wdio/allure-results" # volume mapping the allure results
+    environment:
+      - TZ=Asia/Kolkata # adding timezone
+      - DOCKER_EXECUTION=true
+      - SELENOID=true
+    command: "npm run selenoid-test"
+
+networks:
+  selenoid:
+    name: selenoid

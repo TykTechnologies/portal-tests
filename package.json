@@ -12,6 +12,7 @@
     "notify-slack": "node ./node_modules/ui_test_automation/utils/SlackNotification.js",
     "generate-coverage-doc": "PATH_TO_RESULTS=`PWD`/results/json/wdio-merged.json node ./node_modules/ui_test_automation/utils/GenerateCoverageDoc.js",
     "test": "npx wdio wdio.conf.js",
+    "selenoid-test": "SELENOID=true DOCKER_EXECUTION=true npx wdio wdio.conf.js --spec test/flowSteps/prerequisits.js",
     "docker-test": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js",
     "docker-prerequisits": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js --spec test/flowSteps/prerequisits.js"
   },
@@ -43,7 +44,6 @@
     "ui_test_automation": "git+https://github.com/TykTechnologies/ui_test_automation.git#main",
     "wdio-chromedriver-service": "^7.2.0",
     "wdio-json-reporter": "^2.0.0",
-    "wdio-selenoid-standalone-service": "^1.0.0",
     "wdio-spec-reporter": "^0.1.5"
   },
   "dependencies": {
@@ -52,6 +52,7 @@
     "dotenv": "^10.0.0",
     "expect": "^27.1.1",
     "expect-webdriverio": "^3.1.2",
+    "wdio-selenoid-standalone-service": "^1.0.0",
     "express": "^4.17.2",
     "moment": "^2.29.1",
     "morgan": "^1.10.0",
