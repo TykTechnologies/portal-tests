@@ -9,6 +9,7 @@ if (DOCKER_EXECUTION) {
     // TYK_GW_URL = "http://tyk-gateway:8081/";
     KEYCLOAK_URL = "http://keycloak:8080/";
     KEYCLOAK_WELL_KNOWN_URL = "http://keycloak:8080/auth/realms/master/.well-known/openid-configuration";
+    KEYCLOAK_WELL_KNOWN_URL = "http://keycloak:8080/auth/realms/master/.well-known/openid-configuration";
     TYK_PRO_URL = "http://tyk-dashboard:3000";
 
 } else {
@@ -21,6 +22,9 @@ if (DOCKER_EXECUTION) {
 
 if (SELENOID) {
     URL = "http://host.docker.internal:3001/";
+    TYK_GW_URL = "http://host.docker.internal:8081/";
+    KEYCLOAK_WELL_KNOWN_URL = "http://host.docker.internal8080/auth/realms/master/.well-known/openid-configuration";
+    KEYCLOAK_URL = "http://host.docker.internal:8080/";
 }
 
 module.exports = {

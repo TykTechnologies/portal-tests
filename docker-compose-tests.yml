@@ -1,0 +1,19 @@
+
+version: "3.4"
+services:
+  e2e:
+    image: e2e-test
+    build: .
+    volumes:
+      - "./results:/usr/lib/wdio/results" # volume mapping the time-line results
+    environment:
+      - TZ=Europe/London # adding timezone
+      - DOCKER_EXECUTION=true
+      - SELENOID=true
+    command: "npm run selenoid-prerequisits & npm run selenoid-test"
+    networks:
+      - selenoid
+
+networks:
+  selenoid:
+    name: selenoid

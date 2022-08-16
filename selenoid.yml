@@ -1,0 +1,82 @@
+version: "3.4"
+services:
+  selenoid:
+    image: "aerokube/selenoid:latest"
+    volumes:
+      - "./selenoid:/etc/selenoid"
+      # - "./selenoid-outputs/browsers-vnc:/etc/selenoid:ro"
+      - "./selenoid-outputs/output/:/output"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./selenoid-outputs/video:/opt/selenoid/video"
+      - "./selenoid-outputs/logs:/opt/selenoid/logs"
+    container_name: selenoid
+    ports:
+      - "4444:4444"
+    networks:
+      - selenoid
+    environment:
+      - "OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/selenoid-outputs/video"
+    command: [
+        "-conf", # Flag for browsers configuration
+        "/etc/selenoid/browsers.json", # Location for browsers configuration file
+        "-video-output-dir", # Flag to save recorded video in a directory
+        "/opt/selenoid/video", # Location of the directory
+        "-container-network", # Network to be used for containers - flag
+        "selenoid", # network name
+        "-log-output-dir", # Flag to save logs in a directory
+        "/opt/selenoid/logs", # Location of the directory
+        "-limit", # Flag for number of simultaneous container to run
+        "5", # run count
+        "-save-all-logs", # to save all logs without considering capabilities
+        "-enable-file-upload", # file upload support
+      ]
+
+  # selenoid-video-recorder:
+  #   image: selenoid/video-recorder:latest-release
+  #   networks:
+  #     - selenoid
+
+  # This service enables to view live automation execution
+  selenoid-ui:
+    image: "aerokube/selenoid-ui:latest"
+    container_name: selenoid-ui
+    links:
+      - selenoid
+    networks:
+      - selenoid
+    ports:
+      - "8085:8080"
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+# downloads chrome and firefox browsers which supports vnc
+  vnc_chrome:
+    image: "selenoid/vnc_chrome:100.0"
+    container_name: vnc_chrome
+    links:
+      - selenoid
+      - selenoid-ui
+    depends_on:
+      - selenoid
+      - selenoid-ui
+    networks:
+      - selenoid
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  # vnc_firefox:
+  #   image: "selenoid/vnc_firefox:${FIREFOX_VERSION}"
+  #   container_name: vnc_firefox
+  #   links:
+  #     - selenoid
+  #     - selenoid-ui
+  #   depends_on:
+  #     - selenoid
+  #     - selenoid-ui
+  #   networks:
+  #     - selenoid
+  #   volumes:
+  #     - "/dev/shm:/dev/shm"
+
+networks:
+  selenoid:
+    name: selenoid
