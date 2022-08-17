@@ -5,8 +5,10 @@ global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
     // hostname: 'wdio-selenoid', // tests running inside the container should connect to the same network
+    // hostname: 'host.docker.internal', // tests running inside the container should connect to the same network
+    hostname: 'selenium-hub', // tests running inside the container should connect to the same network
     port: 4444,
-    path: "/wd/hub",
+    path: "/",
     //
     // ====================
     // Runner Configuration
@@ -47,7 +49,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 5,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -58,7 +60,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 4,
         //
         'selenoid:options': { enableVNC: true, enableVideo: false },
         browserName: 'chrome',
@@ -130,9 +132,10 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     services: [
         // ['chromedriver'],
-        ['selenoid-standalone', { 
-            pathToBrowsersConfig: './browsers.json',
-            customSelenoidContainerName: 'wdio-selenoid', }],
+        // ['selenoid-standalone', { 
+        //     pathToBrowsersConfig: './browsers.json',
+        //     // customSelenoidContainerName: 'wdio-selenoid', 
+        //     skipAutoPullImages: true}],
         [TimelineService]
     ],
     
@@ -266,6 +269,7 @@ exports.config = {
         if (error !== undefined) {
             console.error(`>> ERROR: ${error}`);
         };
+        // browser.close();
     },
 
 

@@ -1,26 +1,32 @@
 require('dotenv').config();
 
 const DOCKER_EXECUTION = process.env.DOCKER_EXECUTION || false;
-let URL, TYK_GW_URL, KEYCLOAK_URL, TYK_PRO_URL, KEYCLOAK_WELL_KNOWN_URL; 
+let URL, TYK_GW_URL, TYK_PRO_URL, KEYCLOAK_WELL_KNOWN_URL, KEYCLOAK_URL_TOKEN_ENDPOINT; 
 if (DOCKER_EXECUTION) {
-    // URL = "http://host.docker.internal:3001/";
-    URL = "http://localhost:3001/";
-    // TYK_GW_URL = "http://tyk-gateway:8081/";
-    KEYCLOAK_URL = "http://keycloak:8080/";
-    KEYCLOAK_WELL_KNOWN_URL = "http://keycloak:8080/auth/realms/master/.well-known/openid-configuration";
+    URL = "http://host.docker.internal:3001/";
+    TYK_GW_URL = "http://tyk-gateway:8081/";
+    KEYCLOAK_URL_TOKEN_ENDPOINT = "http://keycloak:8080/auth/realms/master/protocol/openid-connect/token";
+    KEYCLOAK_WELL_KNOWN_URL = "http://localhost:8080/auth/realms/master/.well-known/openid-configuration";
     TYK_PRO_URL = "http://tyk-dashboard:3000";
 
 } else {
     URL = process.env.URL || "http://localhost:3001/";
-    // TYK_GW_URL = process.env.TYK_GW_URL || "http://localhost:8081/";
-    KEYCLOAK_URL = "http://localhost:8080/";
+    TYK_GW_URL = "http://localhost:8081/";
     KEYCLOAK_WELL_KNOWN_URL = "http://localhost:8080/auth/realms/master/.well-known/openid-configuration";
     TYK_PRO_URL = "http://localhost:3000/";
+    KEYCLOAK_URL_TOKEN_ENDPOINT = "http://localhost:8080/auth/realms/master/protocol/openid-connect/token";
 }
+
+// if (SELENOID) {
+//     URL = "http://host.docker.internal:3001/";
+//     TYK_GW_URL = "http://host.docker.internal:8081/";
+//     KEYCLOAK_WELL_KNOWN_URL = "http://host.docker.internal8080/auth/realms/master/.well-known/openid-configuration";
+//     KEYCLOAK_URL = "http://host.docker.internal:8080/";
+// }
 
 module.exports = {
     URL: URL,
-    TYK_GW_URL: process.env.TYK_GW_URL || "http://localhost:8081/",
+    TYK_GW_URL: TYK_GW_URL || "http://localhost:8081/",
     TYK_PRO_URL: TYK_PRO_URL,
     LOGIN_PATH: "auth/login",
     DASHBOARD_API: TYK_PRO_URL + 'api/',
@@ -118,8 +124,7 @@ module.exports = {
     SMTP_PASS:"xyz",
 
     KEYCLOAK_TOKEN: "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI4ODhmNjUzNC03OWRiLTQ2NWQtOWIwMi05MmJhODEzYjE2YTEifQ.eyJleHAiOjE3MzQ2MDkxMDksImlhdCI6MTY0ODIwOTEwOSwianRpIjoiNmEwYTUwMzAtMDc2Zi00NWFlLWI4ODQtNjc0MTIxODQ0MTA1IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODA4MC9hdXRoL3JlYWxtcy9tYXN0ZXIiLCJ0eXAiOiJJbml0aWFsQWNjZXNzVG9rZW4ifQ.azORNclzO5yMq-HdHtL5LYhFqc8mSNijs21C_r9IrKc",
-    KEYCLOAK_URL: KEYCLOAK_URL,
     KEYCLOAK_WELL_KNOWN_URL: KEYCLOAK_WELL_KNOWN_URL,
-    KEYCLOAK_URL_TOKEN_ENDPOINT: "http://localhost:8080/auth/realms/master/protocol/openid-connect/token",
+    KEYCLOAK_URL_TOKEN_ENDPOINT: KEYCLOAK_URL_TOKEN_ENDPOINT,
     CLIENT1_TYPE_NAME: "keycloak_type1"
 };
