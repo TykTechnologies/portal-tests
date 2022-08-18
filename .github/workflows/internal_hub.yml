@@ -45,6 +45,10 @@ jobs:
         docker-compose -f ci/tyk_dashboard.yml up -d
       working-directory: portal-tests
 
+    - name: Startin Selenium grid
+      run: docker-compose -f selenium-grid.yml up -d
+      working-directory: portal-tests
+
     - name: Check if Portal branch exists
       id: check_test_branch
       run: |
