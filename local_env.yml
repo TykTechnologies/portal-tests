@@ -1,0 +1,155 @@
+version: "3.4"
+services:
+  tyk-dashboard:
+      container_name: tyk-dashboard-local
+      image: tykio/tyk-dashboard:v4.0
+      ports:
+          - "3000:3000"
+      environment:
+          - TYK_LOGLEVEL=info
+          - "TYK_DB_LICENSEKEY=${TYK_DB_LICENSEKEY}"
+      volumes:
+          - ./ci/tyk_analytics.conf:/opt/tyk-dashboard/tyk_analytics.conf
+      depends_on:
+          - tyk-redis
+          - tyk-mongo
+  tyk-gateway:
+      container_name: tyk-gateway-local
+      image: tykio/tyk-gateway:v4.0
+      ports:
+          - "8081:8081" 
+      volumes:
+          - ./ci/tyk.conf:/opt/tyk-gateway/tyk.conf
+      environment:
+          - TYK_LOGLEVEL=info
+      depends_on:
+          - tyk-redis
+  tyk-redis:
+      container_name: tyk-redis
+      image: redis:6
+      volumes:
+          - ./ci/redis-volume/data:/data
+      ports:
+          - "6379:6379"
+  tyk-mongo:
+      image: mongo:4.1
+      volumes:
+          - ./ci/mongo-volume/data:/data/db
+      ports:
+          - "27017:27017"
+  keycloak-postgres:
+      image: postgres:10-alpine
+      restart: on-failure:5
+      environment:
+          - POSTGRES_PASSWORD=password
+          - POSTGRES_DB=keycloak
+          - POSTGRES_USER=keycloak
+          - PGDATA=/var/lib/postgresql/data/pgdata
+      ports:
+          - "5432:5432"
+      volumes:
+          - ./ci/keycloak-db/data:/var/lib/postgresql/data
+  keycloak: 
+      image: jboss/keycloak:16.1.0
+      container_name: keycloak
+      environment:
+          # - KEYCLOAK_USER=admin
+          # - KEYCLOAK_PASSWORD=admin
+          - DB_USER=keycloak
+          - DB_PASSWORD=password
+          - DB_ADDR=keycloak-postgres
+          - DB_VENDOR=postgres
+          - KEYCLOAK_FRONTEND_URL=http://localhost:8080/auth
+      ports:
+          - "8080:8080"
+  # e2e:
+  #   # image: e2e-test
+  #   depends_on:
+  #     - selenoid
+  #     - selenoid-ui
+  #   links:
+  #     - selenoid
+  #     - selenoid-ui
+  #   environment:
+  #     - TZ=Asia/Kolkata # adding timezone
+  #     - DOCKER_EXECUTION=true
+  #     - SELENOID=true
+
+  selenoid:
+    image: "aerokube/selenoid:latest"
+    volumes:
+      - "./selenoid:/etc/selenoid"
+      # - "./selenoid-outputs/browsers-vnc:/etc/selenoid:ro"
+      - "./selenoid-outputs/output/:/output"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./selenoid-outputs/video:/opt/selenoid/video"
+      - "./selenoid-outputs/logs:/opt/selenoid/logs"
+    container_name: selenoid
+    ports:
+      - "4444:4444"
+    networks:
+      - selenoid
+    environment:
+      - "OVERRIDE_VIDEO_OUTPUT_DIR=$PWD/selenoid-outputs/video"
+    command: [
+        "-conf", # Flag for browsers configuration
+        "/etc/selenoid/browsers.json", # Location for browsers configuration file
+        "-video-output-dir", # Flag to save recorded video in a directory
+        "/opt/selenoid/video", # Location of the directory
+        "-container-network", # Network to be used for containers - flag
+        "selenoid", # network name
+        "-log-output-dir", # Flag to save logs in a directory
+        "/opt/selenoid/logs", # Location of the directory
+        "-limit", # Flag for number of simultaneous container to run
+        "5", # run count
+        "-save-all-logs", # to save all logs without considering capabilities
+        "-enable-file-upload", # file upload support
+      ]
+
+  selenoid-video-recorder:
+    image: selenoid/video-recorder:latest-release
+
+  # This service enables to view live automation execution
+  selenoid-ui:
+    image: "aerokube/selenoid-ui:latest"
+    container_name: selenoid-ui
+    links:
+      - selenoid
+    ports:
+      - "8085:8080"
+    networks:
+      - selenoid
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+
+# downloads chrome and firefox browsers which supports vnc
+  vnc_chrome:
+    image: "selenoid/vnc_chrome:100.0"
+    container_name: vnc_chrome
+    links:
+      - selenoid
+      - selenoid-ui
+    depends_on:
+      - selenoid
+      - selenoid-ui
+    networks:
+      - selenoid
+    volumes:
+      - "/dev/shm:/dev/shm"
+
+  # vnc_firefox:
+  #   image: "selenoid/vnc_firefox:${FIREFOX_VERSION}"
+  #   container_name: vnc_firefox
+  #   links:
+  #     - selenoid
+  #     - selenoid-ui
+  #   depends_on:
+  #     - selenoid
+  #     - selenoid-ui
+  #   networks:
+  #     - selenoid
+  #   volumes:
+  #     - "/dev/shm:/dev/shm"
+
+networks:
+  selenoid:
+    name: selenoid

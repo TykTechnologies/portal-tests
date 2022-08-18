@@ -37,4 +37,4 @@ RUN apk add chromium
 # RUN docker pull selenium/standalone-chrome
 # Copying all the source code into the folder
 ENV PATH = ${PATH}:/usr/lib/wdio
-# COPY . /usr/lib/wdio
+COPY . /usr/lib/wdio

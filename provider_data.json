@@ -1,0 +1,8 @@
+{
+    "URL": "http://localhost:3000",
+    "Secret": "eb18a1d86ae7492f55e6190ffde6ad55",
+    "OrgID": "617006c1829b6f0001c6c039",
+    "PoliciesTags": [
+        "portal_tag"
+    ]
+}
