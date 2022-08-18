@@ -5,13 +5,13 @@ services:
     build: .
     volumes:
       # - "./results:/usr/lib/wdio/results" # volume mapping the time-line results
-      - ".:/usr/lib/wdio/" # volume mapping the time-line results
+      # - ".:/usr/lib/wdio/" # volume mapping the time-line results
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Europe/London # adding timezone
       - DOCKER_EXECUTION=true
       - SELENOID=true
-    command: " npm run docker-prerequisits"
+    command: "npm run docker-prerequisits"
     # command: " npm run docker-test"
     # command: "docker pull selenium/standalone-chrome:latest \ docker run -d -p 4444:4444 selenium/standalone-chrome \ npm run docker-prerequisits"
 
