@@ -13,7 +13,7 @@
     "notify-slack": "node ./node_modules/ui_test_automation/utils/SlackNotification.js",
     "generate-coverage-doc": "PATH_TO_RESULTS=`PWD`/results/json/wdio-merged.json node ./node_modules/ui_test_automation/utils/GenerateCoverageDoc.js",
     "test": "npx wdio wdio.conf.js",
-    "docker-test": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js",
+    "docker-test": "curl http://host.docker.internal:3001 & DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js",
     "docker-prerequisits": "DOCKER_EXECUTION=true npx wdio wdio_docker.conf.js --spec test/flowSteps/prerequisits.js"
   },
   "repository": {
