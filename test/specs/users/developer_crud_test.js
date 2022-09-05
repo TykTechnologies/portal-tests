@@ -22,9 +22,6 @@ describe('Creating new developer', () => {
         api_consumers_page.fillNewUserForm(userDetails);
         browser.pause(2000);
         api_consumers_page.SAVE_BUTTON.click();
-        if (api_consumers_page.SAVE_BUTTON.isDisplayed()){
-            api_consumers_page.SAVE_BUTTON.click();
-        }
     });
 
     it('New user is visible in the user table', () => {
