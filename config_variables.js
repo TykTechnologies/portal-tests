@@ -17,7 +17,7 @@ if (DOCKER_EXECUTION) {
     TYK_PRO_URL = "http://localhost:3000/";
     KEYCLOAK_URL_TOKEN_ENDPOINT = "http://localhost:8080/auth/realms/master/protocol/openid-connect/token";
 }
-if (ARA_TYK) {
+if (process.env.ARA_TYK) {
     TYK_GW_URL = "https://breezy-barracks-gw.aws-euw1.cloud-ara.tyk.io";
     TYK_PRO_URL = "https://secondary-pantsuit-adm.aws-euw1.cloud-ara.tyk.io";
 }
