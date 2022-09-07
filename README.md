@@ -3,10 +3,40 @@ UI automated tests for Portal
 
 test coverage can be found [here](coverage.md)
 
+## Running tests in docker
+To dockerize the framework we are using Selenium hub. This will install dependecies, run the driver and browser inside containers (no need for nodejs, npm or chrome to be installed locally).
+1. Clone this repository
+2. Generate and export license (for Portal and dashboard) to env variables
+```
+export PORTAL_LICENSEKEY=%license%
+export TYK_DB_LICENSEKEY=%license%
+```
+3. Start dependencies. This will start Tyk stack and Selenium hub
+```
+make start-dependecies
+```
+4. Build test framework image (this need to be done only once)
+```
+make build-framework
+```
+5. Execute prerequisits (run only once, on clear Portal)
+```
+make execute-prerequisits
+```
+6. Execute tests
+```
+make execute-tests
+```
+You can now edit the framework code (on your local) and just re-run *execute-tests*, no need of rebuilding the image. Results should be created in */result* folder.
+To kill dockers with dependencies just run:
+```
+make stop-dependecies
+```
+
 ## Prerequisits for manual testing
 If you just need a working instance of Portal connected with Tyk and Keycloak - start docker-compose (point 2 below) and make your Portal to use database saved in ci/portal.db file.
 Portal should now be connected to Tyk Dahsboard and be have DCR details set up.
-## How to run tests
+## How to run tests locally (not using Selenium hub)
 Tests can be executed inside docker wdio service.
 1. Clone this repository
 2. Install framework dependencies

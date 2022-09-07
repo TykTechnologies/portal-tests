@@ -86,11 +86,17 @@ jobs:
       run: |
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:3000/hello/)" != "200" ]]; do sleep 5 && echo "waiting for dashboard '$(date +"%T")'" && echo "$(curl localhost:3000/hello/)"; done
         while [[ "$(curl -s -o /dev/null -w ''%{http_code}'' localhost:8080)" != "200" ]]; do sleep 5 && echo "waiting for keycloak '$(date +"%T")'" && echo "$(curl localhost:8080)"; done
-      timeout-minutes: 15  
+      timeout-minutes: 15
+
+    - name: Get github host IP
+      id: ip
+      uses: haythem/public-ip@v1.2  
     
     - name: Execute prerequisites
       run: |
           make execute-prerequisits
+      env:
+        HOST_IP: ${{ steps.ip.outputs.ipv4 }}
       working-directory: portal-tests
 
     - name: Execute UI tests

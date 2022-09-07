@@ -1,9 +1,10 @@
 require('dotenv').config();
 
 const DOCKER_EXECUTION = process.env.DOCKER_EXECUTION || false;
-let URL, TYK_GW_URL, TYK_PRO_URL, KEYCLOAK_WELL_KNOWN_URL, KEYCLOAK_URL_TOKEN_ENDPOINT; 
+let URL, HOST_IP, TYK_GW_URL, TYK_PRO_URL, KEYCLOAK_WELL_KNOWN_URL, KEYCLOAK_URL_TOKEN_ENDPOINT; 
 if (DOCKER_EXECUTION) {
-    URL = "http://host.docker.internal:3001/";
+    HOST_IP = process.env.HOST_IP || "host.docker.internal";
+    URL = `http://${HOST_IP}:3001/`;
     TYK_GW_URL = "http://tyk-gateway:8081/";
     KEYCLOAK_URL_TOKEN_ENDPOINT = "http://keycloak:8080/auth/realms/master/protocol/openid-connect/token";
     KEYCLOAK_WELL_KNOWN_URL = "http://localhost:8080/auth/realms/master/.well-known/openid-configuration";
@@ -16,13 +17,6 @@ if (DOCKER_EXECUTION) {
     TYK_PRO_URL = "http://localhost:3000/";
     KEYCLOAK_URL_TOKEN_ENDPOINT = "http://localhost:8080/auth/realms/master/protocol/openid-connect/token";
 }
-
-// if (SELENOID) {
-//     URL = "http://host.docker.internal:3001/";
-//     TYK_GW_URL = "http://host.docker.internal:8081/";
-//     KEYCLOAK_WELL_KNOWN_URL = "http://host.docker.internal8080/auth/realms/master/.well-known/openid-configuration";
-//     KEYCLOAK_URL = "http://host.docker.internal:8080/";
-// }
 
 module.exports = {
     URL: URL,
