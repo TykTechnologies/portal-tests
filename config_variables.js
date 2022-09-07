@@ -17,6 +17,10 @@ if (DOCKER_EXECUTION) {
     TYK_PRO_URL = "http://localhost:3000/";
     KEYCLOAK_URL_TOKEN_ENDPOINT = "http://localhost:8080/auth/realms/master/protocol/openid-connect/token";
 }
+if (ARA_TYK) {
+    TYK_GW_URL = "https://breezy-barracks-gw.aws-euw1.cloud-ara.tyk.io";
+    TYK_PRO_URL = "https://secondary-pantsuit-adm.aws-euw1.cloud-ara.tyk.io";
+}
 
 module.exports = {
     URL: URL,
@@ -50,7 +54,8 @@ module.exports = {
     DEV_B_EMAIL: "devB@tyk.io",
     DEV_D_EMAIL: "devD@tyk.io",
     DEV_PASS: "test123",
-    TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
+    // TYK_SECRET: "eb18a1d86ae7492f55e6190ffde6ad55",
+    TYK_SECRET: "c923b8b8b971495470b8e7d14a2d47fc",
     TYK_ORG_ID: "617006c1829b6f0001c6c039",
     TYK_ADMIN_SECRET: "12345",
 

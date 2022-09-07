@@ -12,6 +12,7 @@ services:
       - DOCKER_EXECUTION=true
       - SELENOID=true
       - HOST_IP=${HOST_IP}
+      - ARA_TYK=${ARA_TYK}
     command: "npm run docker-test"
 
 networks:
