@@ -92,13 +92,13 @@ jobs:
     
     - name: Execute prerequisites
       run: |
-          ARA_TYK=true npm run headless-prerequisits
+          npm run headless-prerequisits
       working-directory: portal-tests
 
     - name: Execute UI tests
       id: test_execution
       run: |
-        ARA_TYK=true npm run headless-test
+        npm run headless-test
       working-directory: portal-tests
     
     - name: Archive UI test report
