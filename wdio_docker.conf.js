@@ -60,9 +60,9 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 4,
+        maxInstances: 2,
         //
-        'selenoid:options': { enableVNC: true, enableVideo: false },
+        // 'selenoid:options': { enableVNC: true, enableVideo: false },
         browserName: 'chrome',
         "goog:chromeOptions": {
             args: [
@@ -225,7 +225,7 @@ exports.config = {
      * @param {Object}         browser      instance of created browser/device session
      */
     before: function (capabilities, specs) {
-        require('expect-webdriverio').setOptions({ wait: 10000 });
+        require('expect-webdriverio').setOptions({ wait: 15000 });
         global.wdioExpect = global.expect;
         const chai = require('chai');
         global.expect = chai.expect;
@@ -269,7 +269,7 @@ exports.config = {
         if (error !== undefined) {
             console.error(`>> ERROR: ${error}`);
         };
-        // browser.close();
+        // browser.pause(200);
     },
 
 

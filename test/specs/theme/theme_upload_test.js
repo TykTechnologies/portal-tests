@@ -13,19 +13,23 @@ describe('Uploading theme and making it active', () => {
   before(() => {
     login_page.open();
     login_page.login();
+    //make sure that default theme is active
+    admin_page.THEMES_BUTTON.click();
+    if (themes_page.isThemeNotActive(defaultThemeName)) {
+      themes_page.activateTheme(defaultThemeName);
+    }
   });
 
   it('Admin should be able to upload new Theme', () => {
-    admin_page.THEMES_BUTTON.click();
-    //make sure that theme is not already there
-    themes_page.TABLE.expectCellWithTextNotToBeDisplayed(themeName);
-    themes_page.ADD_BUTTON.click();
-    uploadZipFile();
-    themes_page.SAVE_BUTTON.click();
-    wdioExpect(themes_page.SUCCESS_MESSAGE_ALERT).toBeDisplayed();
+    if (!themes_page.TABLE.$(`div*=${themeName}`).isDisplayed()) {
+      themes_page.ADD_BUTTON.click();
+      uploadZipFile();
+      themes_page.SAVE_BUTTON.click();
+      wdioExpect(themes_page.SUCCESS_MESSAGE_ALERT).toBeDisplayed();
+      }
   });
 
-  it('New theme is visible in the Team table', () => {
+  it('New theme is visible in the Theam table', () => {
     themes_page.TABLE.expectCellWithTextToBeDisplayed(themeName);
   });
 

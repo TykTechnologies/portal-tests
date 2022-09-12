@@ -5,7 +5,7 @@ services:
     build: .
     volumes:
       # - "./results:/usr/lib/wdio/results" # volume mapping the time-line results
-      # - ".:/usr/lib/wdio/" # volume mapping the code of framewrk
+      - .:/usr/lib/wdio/ # volume mapping the code of framewrk
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Europe/London # adding timezone

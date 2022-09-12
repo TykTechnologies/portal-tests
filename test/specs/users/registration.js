@@ -3,10 +3,11 @@ import { registration_page } from '../../../lib/pom/Registration_page';
 import { login_page } from '../../../lib/pom/Login_page';
 import { admin_page } from '../../../lib/pom/Admin_page';
 import { portal_page } from '../../../lib/pom/Portal_page';
+import { uuid } from 'uuidv4';
 
 describe('Registation without invite code', () => {
   var registrationDetails = {
-    email: "withoutInvite@tyk.io",
+    email: `withoutInvite_${uuid()}@tyk.io`,
     first: "Kurt",
     last: "Cobain",
     password: "test123"

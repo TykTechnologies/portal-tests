@@ -4,7 +4,7 @@ services:
     image: e2e-test
     build: .
     volumes:
-      - ".:/usr/lib/wdio/" # volume mapping the time-line results
+      - .:/usr/lib/wdio/ # volume mapping the time-line results
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
       - TZ=Europe/London # adding timezone
