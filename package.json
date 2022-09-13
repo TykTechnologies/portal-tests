@@ -9,6 +9,7 @@
   "scripts": {
     "headless-test": "WDIO_HEADLESS=1 npm test",
     "headless-prerequisits": "WDIO_HEADLESS=1 npx wdio wdio.conf.js --spec test/flowSteps/prerequisits.js",
+    "prerequisits": "DOCKER_EXECUTION=true WDIO_HEADLESS=1 npx wdio wdio.conf.js --spec test/flowSteps/prerequisits.js",
     "notify-slack": "node ./node_modules/ui_test_automation/utils/SlackNotification.js",
     "generate-coverage-doc": "PATH_TO_RESULTS=`PWD`/results/json/wdio-merged.json node ./node_modules/ui_test_automation/utils/GenerateCoverageDoc.js",
     "test": "npx wdio wdio.conf.js",
@@ -35,7 +36,7 @@
     "@wdio/spec-reporter": "^7.10.1",
     "@wdio/sync": "^7.12.2",
     "chai": "^4.3.4",
-    "chromedriver": "^104.0.0",
+    "chromedriver": "^105.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-wdio": "^7.4.2",
     "express": "^4.17.2",

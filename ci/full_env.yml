@@ -61,7 +61,7 @@ services:
            - "1025:1025"
     keycloak-postgres:
         image: postgres:10-alpine
-        restart: on-failure:5
+        # restart: on-failure:5
         environment:
             - POSTGRES_PASSWORD=password
             - POSTGRES_DB=keycloak

@@ -5,8 +5,10 @@ global.downloadDir = path.join(__dirname, 'tempDownload');
 
 exports.config = {
     // hostname: 'wdio-selenoid', // tests running inside the container should connect to the same network
+    // hostname: 'host.docker.internal', // tests running inside the container should connect to the same network
+    hostname: 'selenium-hub', // tests running inside the container should connect to the same network
     port: 4444,
-    path: "/wd/hub",
+    path: "/",
     //
     // ====================
     // Runner Configuration
@@ -47,7 +49,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 3,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -58,9 +60,9 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 5,
+        maxInstances: 3,
         //
-        'selenoid:options': { enableVNC: true, enableVideo: false },
+        // 'selenoid:options': { enableVNC: true, enableVideo: false },
         browserName: 'chrome',
         "goog:chromeOptions": {
             args: [
@@ -119,7 +121,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 30000,
     //
     // Default request retries count
     connectionRetryCount: 3,
@@ -130,9 +132,10 @@ exports.config = {
     // commands. Instead, they hook themselves up into the test process.
     services: [
         // ['chromedriver'],
-        ['selenoid-standalone', { 
-            pathToBrowsersConfig: './browsers.json',
-            customSelenoidContainerName: 'wdio-selenoid', }],
+        // ['selenoid-standalone', { 
+        //     pathToBrowsersConfig: './browsers.json',
+        //     // customSelenoidContainerName: 'wdio-selenoid', 
+        //     skipAutoPullImages: true}],
         [TimelineService]
     ],
     
@@ -177,7 +180,7 @@ exports.config = {
         // Babel setup
         require: ['@babel/register'],
         ui: 'bdd',
-        timeout: 15*60000
+        timeout: 2*60000
     },
     //
     // =====
@@ -222,7 +225,7 @@ exports.config = {
      * @param {Object}         browser      instance of created browser/device session
      */
     before: function (capabilities, specs) {
-        require('expect-webdriverio').setOptions({ wait: 10000 });
+        require('expect-webdriverio').setOptions({ wait: 15000 });
         global.wdioExpect = global.expect;
         const chai = require('chai');
         global.expect = chai.expect;
@@ -266,6 +269,7 @@ exports.config = {
         if (error !== undefined) {
             console.error(`>> ERROR: ${error}`);
         };
+        // browser.close();
     },
 
 

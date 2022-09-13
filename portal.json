@@ -1,0 +1,13 @@
+{
+    "HostPort": 3001,
+
+
+    "Blog": {
+        "Enable": true
+    },
+    "Site": {
+        "Enable": true
+    },
+    "admin": "auto_test@tyk.io",
+    "pass":"test123"
+}

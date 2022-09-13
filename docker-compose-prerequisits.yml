@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+  e2e:
+    image: e2e-test
+    build: .
+    volumes:
+      - .:/usr/lib/wdio/ # volume mapping the time-line results
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - TZ=Europe/London # adding timezone
+      - DOCKER_EXECUTION=true
+      - SELENOID=true
+      - HOST_IP=${HOST_IP}
+      - ARA_TYK=${ARA_TYK}
+    command: "npm run docker-prerequisits"
+
+networks:
+  default:
+    external: false
+    name: tyk-test

@@ -39,7 +39,7 @@ services:
            - "27017:27017"
     keycloak-postgres:
         image: postgres:10-alpine
-        restart: on-failure:5
+        # restart: on-failure:5
         environment:
             - POSTGRES_PASSWORD=password
             - POSTGRES_DB=keycloak
