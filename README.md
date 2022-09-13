@@ -5,10 +5,10 @@ test coverage can be found [here](coverage.md)
 
 ## Running tests in docker
 To dockerize the framework we are using Selenium hub. This will install dependecies, run the driver and browser inside containers (no need for nodejs, npm or chrome to be installed locally).
+Just make sure that you have bootstraped portal and running on localhost:3001.
 1. Clone this repository
 2. Generate and export license (for Portal and dashboard) to env variables
 ```
-export PORTAL_LICENSEKEY=%license%
 export TYK_DB_LICENSEKEY=%license%
 ```
 3. Start dependencies. This will start Tyk stack and Selenium hub

@@ -49,7 +49,7 @@ exports.config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 5,
+    maxInstances: 3,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -60,7 +60,7 @@ exports.config = {
         // maxInstances can get overwritten per capability. So if you have an in-house Selenium
         // grid with only 5 firefox instances available you can make sure that not more than
         // 5 instances get started at a time.
-        maxInstances: 2,
+        maxInstances: 3,
         //
         // 'selenoid:options': { enableVNC: true, enableVideo: false },
         browserName: 'chrome',
@@ -121,7 +121,7 @@ exports.config = {
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
-    connectionRetryTimeout: 120000,
+    connectionRetryTimeout: 30000,
     //
     // Default request retries count
     connectionRetryCount: 3,
@@ -180,7 +180,7 @@ exports.config = {
         // Babel setup
         require: ['@babel/register'],
         ui: 'bdd',
-        timeout: 15*60000
+        timeout: 2*60000
     },
     //
     // =====
@@ -269,7 +269,7 @@ exports.config = {
         if (error !== undefined) {
             console.error(`>> ERROR: ${error}`);
         };
-        // browser.pause(200);
+        // browser.close();
     },
 
 
