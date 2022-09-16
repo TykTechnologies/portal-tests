@@ -13,6 +13,8 @@ services:
         depends_on:
             - tyk-redis
             - tyk-mongo
+        networks:
+            - tyk-test            
     tyk-gateway:
         container_name: tyk-gateway-local
         image: tykio/tyk-gateway:v4.0
@@ -24,6 +26,19 @@ services:
             - TYK_LOGLEVEL=info
         depends_on:
             - tyk-redis
+        networks:
+            - tyk-test            
+    tyk-pump:
+        image: tykio/tyk-pump-docker-pub:${PUMP_VERSION:-v1.5.1}
+        ports:
+            - 8083:8083
+        networks:
+            - tyk-test
+        volumes:
+            - ./pump.conf:/opt/tyk-pump/pump.conf
+        depends_on:
+            - tyk-redis
+            - tyk-mongo            
     tyk-redis:
         container_name: tyk-redis
         image: redis:6
@@ -31,12 +46,16 @@ services:
             - ./redis-volume/data:/data
         ports:
             - "6379:6379"
+        networks:
+            - tyk-test            
     tyk-mongo:
         image: mongo:4.1
         volumes:
             - ./mongo-volume/data:/data/db
         ports:
            - "27017:27017"
+        networks:
+            - tyk-test           
     keycloak-postgres:
         image: postgres:10-alpine
         # restart: on-failure:5
@@ -49,6 +68,8 @@ services:
             - "5432:5432"
         volumes:
             - ./keycloak-db/data:/var/lib/postgresql/data
+        networks:
+            - tyk-test            
     keycloak: 
         image: jboss/keycloak:16.1.0
         container_name: keycloak
@@ -65,11 +86,10 @@ services:
         # volumes:
         #     - ./keycloak/:/opt/jboss/keycloak/standalone/data/
         networks:
-            - default
+            - tyk-test
         depends_on:
             - keycloak-postgres
 
 networks:
-  default:
-    external: false
-    name: tyk-test
+  tyk-test:
+    external: true
