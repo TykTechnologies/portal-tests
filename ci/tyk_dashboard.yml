@@ -91,5 +91,5 @@ services:
             - keycloak-postgres
 
 networks:
-  tyk-test:
-    external: true
+    tyk-test:
+        external: false
