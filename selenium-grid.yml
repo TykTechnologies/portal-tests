@@ -5,6 +5,8 @@ services:
     shm_size: 2gb
     depends_on:
       - selenium-hub
+    networks:
+      - tyk-test
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
@@ -69,12 +71,13 @@ services:
   selenium-hub:
     image: selenium/hub:4.4.0
     container_name: selenium-hub
+    networks:
+      - tyk-test
     ports:
       - "4442:4442"
       - "4443:4443"
       - "4444:4444"
 
 networks:
-  default:
-    external:
-      name: tyk-test
+    tyk-test:
+        external: true

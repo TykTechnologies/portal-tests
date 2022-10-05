@@ -93,3 +93,4 @@ services:
 networks:
     tyk-test:
         external: false
+        name: tyk-test
