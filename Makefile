@@ -15,5 +15,6 @@ execute-tests:
 	docker-compose -f docker-compose-test.yml up
 stop-dependecies:
 	$(info Make: Starting Tyk dashboard and dependecies)
-	docker-compose --env-file .env -f ci/tyk_dashboard.yml down --remove-orphans &
-	docker-compose -f selenium-grid.yml down --remove-orphans &
+	docker network rm tyk-test &
+	docker-compose --env-file .env -f ci/tyk_dashboard.yml down -v --remove-orphans &
+	docker-compose -f selenium-grid.yml down --remove-orphans

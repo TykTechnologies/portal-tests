@@ -89,6 +89,13 @@ services:
             - tyk-test
         depends_on:
             - keycloak-postgres
+    mailhog:
+        image: mailhog/mailhog
+        networks:
+            - tyk-test
+        ports:
+           - "8025:8025"
+           - "1025:1025"
 
 networks:
     tyk-test:

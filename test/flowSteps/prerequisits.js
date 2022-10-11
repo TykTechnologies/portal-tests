@@ -241,8 +241,9 @@ it('Admin should be able to ADD provider with proper Tyk details', () => {
 
   it("Add email settings", function () {
     admin_page.GENERAL_BUTTON.click();
-    general_settings_page.EMAIL_DEFAULT_FROM_ADDRESS_INPUT.setValue(d.EMAIL_DEFAULT_FROM_ADDRESS);
+    general_settings_page.setEmailConfig();
     general_settings_page.SAVE_CHANGES_BUTTON.click();
+    wdioExpect(general_settings_page.SUCCESS_MESSAGE_ALERT).toBeDisplayed();
   });
 
 });
