@@ -1,4 +1,4 @@
-version: "3.4"
+version: "3.5"
 services:
   e2e:
     image: e2e-test
@@ -13,6 +13,8 @@ services:
       - HOST_IP=${HOST_IP}
       - ARA_TYK=${ARA_TYK}
     command: "npm run docker-prerequisits"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"    
 
 networks:
   default:

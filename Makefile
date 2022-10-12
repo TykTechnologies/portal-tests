@@ -1,4 +1,4 @@
-start-dependecies:
+start-dependencies:
 	$(info Make: Starting Tyk dashboard and dependecies)
 	docker-compose --env-file .env -f ci/tyk_dashboard.yml up &
 	sleep 5 
@@ -13,7 +13,7 @@ execute-tests:
 	$(info Make: Executing tests)
 	rm -fr results
 	docker-compose -f docker-compose-test.yml up
-stop-dependecies:
+stop-dependencies:
 	$(info Make: Starting Tyk dashboard and dependecies)
 	docker network rm tyk-test &
 	docker-compose --env-file .env -f ci/tyk_dashboard.yml down -v --remove-orphans &
