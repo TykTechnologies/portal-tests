@@ -7,6 +7,8 @@ services:
       - selenium-hub
     networks:
       - tyk-test
+    extra_hosts:
+      - "host.docker.internal:host-gateway"           
     environment:
       - SE_EVENT_BUS_HOST=selenium-hub
       - SE_EVENT_BUS_PUBLISH_PORT=4442
