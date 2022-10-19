@@ -3,7 +3,7 @@ import { main_page } from '../../../lib/pom/Main_page';
 import { registration_page } from '../../../lib/pom/Registration_page';
 import { DEV_EMAIL, DEV_PASS } from '../../../config_variables';
 
-describe('Portal vibility', () => {
+describe('Prerequisits', () => {
     const devUserDetails = {
         email: DEV_EMAIL,
         first: "dev",

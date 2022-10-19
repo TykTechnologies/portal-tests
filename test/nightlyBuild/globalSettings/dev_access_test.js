@@ -7,7 +7,7 @@ import { DEV_PASS } from '../../../config_variables';
 import { api_consumers_page } from '../../../lib/pom/Api_consumers_page';
 import { registration_page } from '../../../lib/pom/Registration_page';
 
-describe('Portal vibility', () => {
+describe('Dev access tests', () => {
     const devUserDetails = {
         email: "test_access@tyk.io",
         first: "test_access",

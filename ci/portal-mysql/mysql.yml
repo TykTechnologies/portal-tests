@@ -5,7 +5,7 @@ services:
   mysql:
     image: mysql:8.0
     command: --default-authentication-plugin=mysql_native_password --sql_mode="ALLOW_INVALID_DATES"
-    restart: always
+    # restart: always
     environment:
       MYSQL_ROOT_PASSWORD: secr3t
       MYSQL_DATABASE: portal
