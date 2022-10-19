@@ -6,7 +6,7 @@ import { admin_page } from '../../../lib/pom/Admin_page';
 import { general_settings_page } from '../../../lib/pom/General_settings_page';
 import { URL } from '../../../config_variables';
 
-describe('Portal vibility', () => {
+describe('Portal visibility', () => {
     const cataloguesURLPath = URL + "portal/catalogue-products";
     before(() => {
         login_page.open();
