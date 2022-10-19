@@ -25,6 +25,10 @@ describe('Creating new developer', () => {
     });
 
     it('New user is visible in the user table', () => {
+        if (!$(`div=${userDetails.email}.isDisplayed()`) && api_consumers_page.SAVE_BUTTON.isClickable())
+        {
+            api_consumers_page.SAVE_BUTTON.click();
+        }    
         wdioExpect($(`div=${userDetails.email}`)).toBeDisplayed();
     });
 
