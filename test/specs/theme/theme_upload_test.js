@@ -52,7 +52,7 @@ describe('Uploading theme and making it active', () => {
     themes_page.activateTheme(defaultThemeName);
     browser.pause(2000);
     browser.url(cataloguesURLPath);
-    wdioExpect($('h1*=Product Catalogues Test Theme')).not.toBeDisplayed();
+    wdioExpect($('h1*=Product Catalogues TEST THEME v1.0.1')).not.toBeDisplayed();
     wdioExpect($('h1*=Product Catalogues')).toBeDisplayed();
   });
 
