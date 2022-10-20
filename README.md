@@ -4,6 +4,10 @@ UI automated tests for Portal
 test coverage can be found [here](coverage.md)
 
 ## Running tests in docker
+Before running tests make sure that your Portal is running on localhost:3001 and was bootstraped with (auto_test@tyk.io) admin user. Command to bootstrap:
+```
+./dev-portal -bootstrap -user=auto_test@tyk.io -pass=test123
+```
 To dockerize the framework we are using Selenium hub. This will install dependecies, run the driver and browser inside containers (no need for nodejs, npm or chrome to be installed locally).
 Just make sure that you have bootstraped portal and running on localhost:3001.
 1. Clone this repository
