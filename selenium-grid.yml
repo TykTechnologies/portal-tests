@@ -1,7 +1,8 @@
 version: "3"
 services:
   chrome:
-    image: selenium/node-chrome:105.0-20220831
+    image: seleniarm/node-chromium:105.0
+    # image: selenium/node-chrome:105.0-20220831
     shm_size: 2gb
     depends_on:
       - selenium-hub
@@ -16,7 +17,6 @@ services:
       - VNC_NO_PASSWORD=1
       - SE_NODE_MAX_SESSIONS=3
       - JAVA_OPTS=-Dwebdriver.chrome.whitelistedIps=
-
 
   selenium-hub:
     image: selenium/hub:4.4.0
